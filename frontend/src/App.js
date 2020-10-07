@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
+import Video from "./components/Video/Video";
 
 function App() {
 
@@ -10,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path='/videochat' ><h1>Hello</h1></Route>
+        <Route exact path='/videochat' component={Video} />
       </Switch>
     </div>
   );
