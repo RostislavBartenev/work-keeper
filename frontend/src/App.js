@@ -1,12 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
 import Video from "./components/Video/Video";
 
 function App() {
-
-
 
   return (
     <div className="App">
