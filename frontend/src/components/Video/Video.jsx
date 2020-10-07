@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import io from "socket.io-client";
 
 const Video = (props) => {
   const userVideo = useRef();
@@ -8,16 +9,26 @@ const Video = (props) => {
   const otherUser = useRef();
   const userStream = useRef();
 
-  const [videoParams, setVideoParams] = useState(true);
-  const [microParams, setMicroParams] = useState(false);
+  const [videoParams, setVideoParams] = useState(true); // Для включения/выключения видео
+  const [microParams, setMicroParams] = useState(false); // Для включения/выключения звука
 
   useEffect(() => {
 
-    navigator.mediaDevices.getUserMedia({audio: true, video: true})
+    navigator.mediaDevices.getUserMedia({audio: true, video: true}) // подключенные устройства
       .then(stream => {
-        userVideo.current.srcObject = stream;
-        userStream.current = stream;
-        userStream.current.getAudioTracks()[0].enabled = microParams
+
+        userVideo.current.srcObject = stream; // вывод видео
+        userStream.current = stream; // для обращения к прототипам
+        userStream.current.getAudioTracks()[0].enabled = microParams; // отключить микрофон
+
+        // socketRef.current = io.connect('/');
+        // socketRef.current.emit('join room', props.match.params.roomID);
+        //
+        // socketRef.current.on('other user', userID => {
+        //   otherUser.current = userID;
+        // })
+
+
       })
 
   }, [])
