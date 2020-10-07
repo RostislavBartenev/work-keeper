@@ -1,10 +1,16 @@
 const express = require('express');
-const cors = require('cors')
-require('dotenv').config();
+const http = require('http')
 const app = express();
+const server = http.createServer(app);
+const socket = require('socket.io');
+const io = socket(server);
+
+require('dotenv').config();
 const path = require('path');
+const cors = require('cors')
 
 const videoChatRouter = require('./src/routes/videoChat/index');
+
 
 app.set('port', process.env.PORT || 3006);
 
@@ -15,7 +21,7 @@ app.use(cors());
 
 app.use('/videochat', videoChatRouter);
 
-app.listen(app.locals.settings.port, () => {
-    console.log('Server started on port ' + app.locals.settings.port);
+server.listen(app.locals.settings.port, () => {
+  console.log('Server started on port ' + app.locals.settings.port);
 })
 
