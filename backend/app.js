@@ -8,7 +8,7 @@ const cors = require('cors');
 
 
 const dbConnect = require('./db/dbConnect');
-const userRouter = require('./routes/userRouter');
+const userRouter = require('./src/routes/userRouter');
 
 
 dbConnect();
@@ -26,9 +26,39 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 
+
+const rooms = new Map();
+
+app.get('/rooms/:id', (req, res) => {
+  const { id: roomId } = req.params;
+  const obj = rooms.has(roomId)
+    ? {
+      users: [...rooms.get(roomId).get('users').values()],
+      messages: [...rooms.get(roomId).get('messages').values()],
+    }
+    : { users: [], messages: [] };
+  res.json(obj);
+});
+
+app.post('/rooms', (req, res) => {
+  const { roomId, userName } = req.body;
+  if (!rooms.has(roomId)) {
+    rooms.set(
+      roomId,
+      new Map([
+        ['users', new Map()],
+        ['messages', []],
+      ]),
+    );
+  }
+  res.send();
+});
+
+
 const users = {};
 
 const socketToRoom = {};
+
 
 io.on('connection', socket => {
   socket.on("join room", roomID => {
@@ -48,8 +78,29 @@ io.on('connection', socket => {
     socket.emit("all users", usersInThisRoom);
   });
 
+  socket.on('ROOM:JOIN', ({ roomId, userName }) => {
+    socket.join(roomId);
+    rooms.get(roomId).get('users').set(socket.id, userName);
+    const users = [...rooms.get(roomId).get('users').values()];
+    socket.to(roomId).broadcast.emit('ROOM:SET_USERS', users);
+  });
+
+  socket.on('ROOM:NEW_MESSAGE', ({ roomId, userName, text }) => {
+    const obj = {
+      userName,
+      text,
+    };
+    rooms.get(roomId).get('messages').push(obj);
+    socket.to(roomId).broadcast.emit('ROOM:NEW_MESSAGE', obj);
+  });
+
   socket.on("disconnect", () => {
-    console.log('disconnect')
+    rooms.forEach((value, roomId) => {
+      if (value.get('users').delete(socket.id)) {
+        const users = [...value.get('users').values()];
+        socket.to(roomId).broadcast.emit('ROOM:SET_USERS', users);
+      }
+    });
     socket.broadcast.emit("user left");
     delete users[socket.id]
   })
@@ -64,13 +115,6 @@ io.on('connection', socket => {
   });
 
 });
-
-if (process.env.PROD) {
-  app.use(express.static(path.join(__dirname, './frontend/build')))
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './frontend/build/index.html'))
-  })
-}
 
 server.listen(app.locals.settings.port, () => {
   console.log('Server started on port ' + app.locals.settings.port);
