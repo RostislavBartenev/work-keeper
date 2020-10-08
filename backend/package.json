@@ -4,8 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "PROD=true node app.js",
-    "postinstall": "cd ./frontend && npm"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
