@@ -45,7 +45,6 @@ const Room = (props) => {
   const peersRef = useRef([]);
   const roomID = props.match.params.roomID;
   const userStream = useRef();
-  const peerRef = useRef();
 
   const [videoParams, setVideoParams] = useState(true); // Для включения/выключения видео
   const [microParams, setMicroParams] = useState(false); // Для включения/выключения звука
@@ -61,7 +60,6 @@ const Room = (props) => {
 
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", users => {
-
           const peers = [];
           users.forEach(userID => {
             const peer = createPeer(userID, socketRef.current.id, stream);
@@ -69,7 +67,10 @@ const Room = (props) => {
               peerID: userID,
               peer,
             })
-            peers.push(peer);
+            peers.push({
+              peerID: userID,
+              peer
+            });
           })
           setPeers(peers);
         })
@@ -82,7 +83,12 @@ const Room = (props) => {
             peer,
           })
 
-          setPeers(users => [...users, peer]);
+          const peerObj = {
+            peer,
+            peerID: payload.callerID
+          }
+
+          setPeers(users => [...users, peerObj]);
         });
 
         socketRef.current.on("receiving returned signal", payload => {
@@ -90,16 +96,17 @@ const Room = (props) => {
           item.peer.signal(payload.signal);
         });
 
+        socketRef.current.on('user left', id => {
+          const peerObj = peersRef.current.find(p => p.peerID === id)
+          if (peerObj) {
+            peerObj.peer.destroy()
+          }
+          const peers = peersRef.current.filter(p => p.peerID !== id)
+          peersRef.current = peers
+          setPeers(peers)
+        })
 
       })
-
-
-    socketRef.current.on("user left", () => {
-      console.log('left')
-      setPeers([])
-      peerRef.current.destroy()
-    })
-
   }, []);
 
   useEffect(() => {
@@ -123,8 +130,6 @@ const Room = (props) => {
       socketRef.current.emit("sending signal", { userToSignal, callerID, signal })
     })
 
-    peerRef.current = peer;
-
     return peer;
   }
 
@@ -142,8 +147,6 @@ const Room = (props) => {
 
     peer.signal(incomingSignal);
 
-    peerRef.current = peer;
-
     return peer;
   }
 
@@ -154,9 +157,9 @@ const Room = (props) => {
       <StyledVideo muted ref={userVideo} autoPlay playsInline />
       <button onClick={() => setMicroParams(prev => !prev)}>Micro</button>
       <button onClick={() => setVideoParams(prev => !prev)}>Video</button>
-      {peers.map((peer, index) => {
+      {peers.map(peer => {
         return (
-          <Video key={index} peer={peer} />
+          <Video key={peer.peerID} peer={peer.peer} />
         );
       })}
     </Container>
