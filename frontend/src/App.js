@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 
 import { Route, Switch } from 'react-router-dom'
-import Video from "./components/Video/Video";
+import Room from "./components/Room/Room";
 
 function App() {
 
   return (
     <div className="App">
       <Switch>
-        <Route exact path='/videochat' component={Video} />
+        <Route exact path='/videochat' component={Room} />
       </Switch>
     </div>
   );
