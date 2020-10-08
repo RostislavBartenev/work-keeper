@@ -103,10 +103,10 @@ const Room = (props) => {
   }, []);
 
   useEffect(() => {
-    if (userStream.current?.getVideoTracks()[0] && userStream.current.getVideoTracks()[0].enabled !== videoParams) {
+    if (userStream.current && userStream.current.getVideoTracks()[0] && userStream.current.getVideoTracks()[0].enabled !== videoParams) {
       userStream.current.getVideoTracks()[0].enabled = videoParams
     }
-    if (userStream.current?.getAudioTracks()[0] && userStream.current.getAudioTracks()[0].enabled !== microParams) {
+    if (userStream.current && userStream.current.getAudioTracks()[0] && userStream.current.getAudioTracks()[0].enabled !== microParams) {
       userStream.current.getAudioTracks()[0].enabled = microParams
     }
 
