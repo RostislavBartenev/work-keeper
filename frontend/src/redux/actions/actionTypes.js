@@ -1,0 +1,14 @@
+const REGISTRATION = 'REGISTRATION',
+  LOGIN = 'LOGIN',
+  IS_ME = 'IS_ME',
+  LOGOUT = 'LOGOUT',
+  IS_NOT_ME = 'IS_NOT_ME'
+
+
+export {
+  REGISTRATION,
+  LOGIN,
+  IS_ME,
+  LOGOUT,
+  IS_NOT_ME
+}
