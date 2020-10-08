@@ -7,8 +7,9 @@ const io = socket(server);
 const cors = require('cors');
 
 
-const dbConnect = require('./db/dbConnect');
+const dbConnect = require('./src/dbConnect');
 const userRouter = require('./src/routes/userRouter');
+const orgRouter = require('./src/routes/HASAN.orgRouter');
 
 
 dbConnect();
@@ -26,6 +27,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 
+///////////HASAN BACK////////
+
+app.use('/organization', orgRouter);
+
+
+////////////////////////////
 
 const rooms = new Map();
 
