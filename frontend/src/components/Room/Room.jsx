@@ -21,6 +21,7 @@ const Video = (props) => {
   const ref = useRef();
 
   useEffect(() => {
+
     props.peer.on("stream", stream => {
       ref.current.srcObject = stream;
     })
@@ -44,6 +45,7 @@ const Room = (props) => {
   const peersRef = useRef([]);
   const roomID = props.match.params.roomID;
   const userStream = useRef();
+  const peerRef = useRef();
 
   const [videoParams, setVideoParams] = useState(true); // Для включения/выключения видео
   const [microParams, setMicroParams] = useState(false); // Для включения/выключения звука
@@ -59,6 +61,7 @@ const Room = (props) => {
 
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", users => {
+
           const peers = [];
           users.forEach(userID => {
             const peer = createPeer(userID, socketRef.current.id, stream);
@@ -72,6 +75,7 @@ const Room = (props) => {
         })
 
         socketRef.current.on("user joined", payload => {
+          console.log('user join')
           const peer = addPeer(payload.signal, payload.callerID, stream);
           peersRef.current.push({
             peerID: payload.callerID,
@@ -85,8 +89,28 @@ const Room = (props) => {
           const item = peersRef.current.find(p => p.peerID === payload.id);
           item.peer.signal(payload.signal);
         });
+
+
       })
+
+
+    socketRef.current.on("user left", () => {
+      console.log('left')
+      setPeers([])
+      peerRef.current.destroy()
+    })
+
   }, []);
+
+  useEffect(() => {
+    if (userStream.current?.getVideoTracks()[0] && userStream.current.getVideoTracks()[0].enabled !== videoParams) {
+      userStream.current.getVideoTracks()[0].enabled = videoParams
+    }
+    if (userStream.current?.getAudioTracks()[0] && userStream.current.getAudioTracks()[0].enabled !== microParams) {
+      userStream.current.getAudioTracks()[0].enabled = microParams
+    }
+
+  }, [videoParams, microParams])
 
   function createPeer(userToSignal, callerID, stream) {
     const peer = new Peer({
@@ -99,10 +123,13 @@ const Room = (props) => {
       socketRef.current.emit("sending signal", { userToSignal, callerID, signal })
     })
 
+    peerRef.current = peer;
+
     return peer;
   }
 
   function addPeer(incomingSignal, callerID, stream) {
+    console.log('add user')
     const peer = new Peer({
       initiator: false,
       trickle: false,
@@ -115,20 +142,15 @@ const Room = (props) => {
 
     peer.signal(incomingSignal);
 
+    peerRef.current = peer;
+
     return peer;
   }
 
-  useEffect(() => {
-    if (userStream.current?.getVideoTracks()[0] && userStream.current.getVideoTracks()[0].enabled !== videoParams) {
-      userStream.current.getVideoTracks()[0].enabled = videoParams
-    }
-    if (userStream.current?.getAudioTracks()[0] && userStream.current.getAudioTracks()[0].enabled !== microParams) {
-      userStream.current.getAudioTracks()[0].enabled = microParams
-    }
-  }, [videoParams, microParams])
 
   return (
     <Container>
+      {console.log('Render comp')}
       <StyledVideo muted ref={userVideo} autoPlay playsInline />
       <button onClick={() => setMicroParams(prev => !prev)}>Micro</button>
       <button onClick={() => setVideoParams(prev => !prev)}>Video</button>

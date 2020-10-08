@@ -7,6 +7,7 @@ import PrivateRoute from './components/Private/Private';
 
 import { Route, Switch, Redirect } from 'react-router-dom'
 import SignIn from "./components/SignIn";
+import Room from "./components/Room/Room";
 
 import { useSelector } from 'react-redux';
 import Profile from './components/Profile';
@@ -38,9 +39,7 @@ function App() {
 
 
 
-        <Route exact path='/videochat'>
-          <h1>Hello</h1>
-        </Route>
+       <Route exact path='/videochat' component={Room} />
 
 
         <Route exact path="/profile">
@@ -52,6 +51,7 @@ function App() {
         <Route exact path="/">
           {user.isMe ? <Redirect to="/profile" /> : <Redirect to="/user/registration" />}
         </Route>
+
 
         {/* РУЧКА ДЛЯ ЧАТА  */}
         <Route exact path='/signin'>

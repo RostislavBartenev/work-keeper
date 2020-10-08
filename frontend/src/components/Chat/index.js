@@ -44,10 +44,10 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
                 </div>
                 <form>
           <textarea
-              value={messageValue}
-              onChange={(e) => setMessageValue(e.target.value)}
-              className="form-control"
-              rows="3"></textarea>
+          value={messageValue}
+          onChange={(e) => setMessageValue(e.target.value)}
+          className="form-control"
+          rows="3"/>
                     <button onClick={onSendMessage} type="button" className="btn btn-primary">
                         Отправить
                     </button>
