@@ -64,7 +64,7 @@ io.on('connection', socket => {
   socket.on("join room", roomID => {
     if (users[roomID]) {
       const length = users[roomID].length;
-      if (length === 20) {
+      if (length === 4) {
         socket.emit("room full");
         return;
       }
@@ -76,14 +76,6 @@ io.on('connection', socket => {
     const usersInThisRoom = users[roomID].filter(id => id !== socket.id);
 
     socket.emit("all users", usersInThisRoom);
-  });
-
-  socket.on("sending signal", payload => {
-    io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID });
-  });
-
-  socket.on("returning signal", payload => {
-    io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
   });
 
   socket.on('ROOM:JOIN', ({ roomId, userName }) => {
@@ -109,14 +101,18 @@ io.on('connection', socket => {
         socket.to(roomId).broadcast.emit('ROOM:SET_USERS', users);
       }
     });
-    const roomID = socketToRoom[socket.id]
-    let room = users[roomID]
-    if (room) {
-      room = room.filter(id => id !== socket.id)
-      users[roomID] = room
-    }
-    socket.broadcast.emit('user left', socket.id)
+    socket.broadcast.emit("user left");
+    delete users[socket.id]
   })
+
+
+  socket.on("sending signal", payload => {
+    io.to(payload.userToSignal).emit('user joined', { signal: payload.signal, callerID: payload.callerID });
+  });
+
+  socket.on("returning signal", payload => {
+    io.to(payload.callerID).emit('receiving returned signal', { signal: payload.signal, id: socket.id });
+  });
 
 });
 
