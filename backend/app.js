@@ -4,6 +4,14 @@ const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
 const io = socket(server);
+const cors = require('cors');
+
+
+const dbConnect = require('./db/dbConnect');
+const userRouter = require('./routes/userRouter');
+
+
+dbConnect();
 
 require('dotenv').config();
 const path = require('path');
@@ -11,9 +19,12 @@ const path = require('path');
 
 app.set('port', process.env.PORT || 3006);
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/user', userRouter);
 
 const users = {};
 
