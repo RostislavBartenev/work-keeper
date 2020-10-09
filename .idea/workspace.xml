@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5aebc6-d0f3-47e5-ab81-b59a114de332" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/bcrypt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/bcrypt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/controllers/organizationController/organization.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/organizationController/organization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/controllers/userControllers/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/userControllers/registration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/routes/userRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/routes/userRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +63,8 @@
       <workItem from="1602131824502" duration="2911000" />
       <workItem from="1602137467115" duration="7719000" />
       <workItem from="1602154512322" duration="3331000" />
-      <workItem from="1602177610320" duration="196000" />
+      <workItem from="1602177610320" duration="266000" />
+      <workItem from="1602223027727" duration="1195000" />
     </task>
     <servers />
   </component>
@@ -85,5 +92,9 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state width="1652" height="281" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1602071533808" />
+    <state x="419" y="15" width="840" height="1034" key="search.everywhere.popup" timestamp="1602177811206">
+      <screen x="0" y="0" width="1680" height="1050" />
+    </state>
+    <state x="419" y="15" width="840" height="1034" key="search.everywhere.popup/0.0.1680.1050@0.0.1680.1050" timestamp="1602177811206" />
   </component>
 </project>
