@@ -16,7 +16,9 @@ import Navbar from './components/Navbar';
 
 function App() {
 
-  const user = useSelector(state => state.aboutMe)
+  const aboutMe = useSelector(state => state.aboutMe);
+  const user = useSelector(state => state.user)
+
   console.log(user);
 
   return (
@@ -39,17 +41,17 @@ function App() {
 
 
 
-       <Route exact path='/videochat' component={Room} />
+        <Route exact path='/videochat' component={Room} />
 
 
-        <Route exact path="/profile">
-          <PrivateRoute exact path="/profile">
-            <Profile />
-          </PrivateRoute>
-        </Route>
+        {/* <Route exact path={`/profile/:${user.userID}`}> */}
+        <PrivateRoute exact path={`/profile/:id`}>
+          <Profile />
+        </PrivateRoute>
+        {/* </Route> */}
 
         <Route exact path="/">
-          {user.isMe ? <Redirect to="/profile" /> : <Redirect to="/user/registration" />}
+          {aboutMe.isMe ? <Redirect to={`/profile/${user.userID}`} /> : <Redirect to="/user/registration" />}
         </Route>
 
 
