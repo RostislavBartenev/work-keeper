@@ -1,19 +1,20 @@
-const User = require('../../models/userModel');
+const User = require('../../models/HASAN.user.model');
 const createToken = require('../../helpers/token');
-const userDestructuring = require('../../helpers/userDestr');
+const userDestructuring = require('../../helpers/regUserDestr');
 const bcrypt = require("bcrypt");
 
 const saltRounds = process.env.saltRounds ?? 10;
 
 const registration = async (req, res) => {
-  const { name, email, password } = req.body;
-
-  if (name && email && password) {
+  const { name, surname, email, password } = req.body;
+  console.log(req.body);
+  if (name && email && password && surname) {
     try {
       const userPass = await bcrypt.hash(password, +saltRounds);
 
       const newUser = new User({
         name,
+        surname,
         email,
         password: userPass,
       });
