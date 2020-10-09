@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
 const User = require('../../models/userModel');
 const createToken = require('../../helpers/token');
-const userDstructurization = require('../../helpers/userDestr');
+const userDestructuring = require('../../helpers/userDestr');
+const bcrypt = require("bcrypt");
 
 const saltRounds = process.env.saltRounds ?? 10;
 
@@ -25,7 +25,7 @@ const registration = async (req, res) => {
 
       await newUser.save();
 
-      return res.json(userDstructurization(newUser));
+      return res.json(userDestructuring(newUser));
     } catch (error) {
       console.log(error);
       return res.status(422).json({ message: 'Email already exists in system' });

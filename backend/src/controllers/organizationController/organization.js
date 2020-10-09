@@ -31,7 +31,7 @@ module.exports.create = async function (req, res) {
 }
 
 // УДАЛЯЕМ ОРГАНИЗАЦИЮ
-module.exports.update = async function (req, res) {
+module.exports.delete = async function (req, res) {
   try {
     await Organization.remove({ _id: req.params.id })
     res.status(200).json({
