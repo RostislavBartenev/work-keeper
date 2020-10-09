@@ -4,6 +4,6 @@ import aboutMeReducer from "./aboutMeReducer";
 
 
 export default combineReducers({
-  users: usersReducer,
+  user: usersReducer,
   aboutMe: aboutMeReducer,
 })

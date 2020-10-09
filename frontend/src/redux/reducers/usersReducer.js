@@ -5,7 +5,7 @@ const userReducer = (state = {}, action) => {
     case ACTION_TYPES.REGISTRATION:
       return {
         ...state,
-        [action.payload.name]: action.payload
+        ...action.payload
       };
     case ACTION_TYPES.LOGIN:
       return {

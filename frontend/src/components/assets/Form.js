@@ -41,7 +41,7 @@ const Form = ({ title, isReg }) => {
   const history = useHistory()
 
   const [inputs, setInputs] = useState({});
-  const [message, setMessage] = useState(false);
+  const [message, setMessage] = useState('');
   const dispatch = useDispatch();
 
   function handlerAll({ target: { value, name } }) {
@@ -55,26 +55,32 @@ const Form = ({ title, isReg }) => {
     event.preventDefault();
     console.log(inputs);
     try {
-      const response = await fetch('http://localhost:3006/user/login', {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputs),
       })
       const result = await response.json();
+
+      //////
+      console.log('LOGIN', result);
+      //////
+
       if (response.ok) {
         dispatch(ACTION_TASKS.LOGIN(result));
-        dispatch(ACTION_TASKS.IS_ME(result.name));
+        dispatch(ACTION_TASKS.IS_ME());
+
+        setInputs({
+          email: '',
+          password: ''
+        });
+
+        history.push(`/profile/${result.userID}`)
 
       } else {
-        console.log(result.message);
-        setMessage(true);
+        // console.log(result.message);
+        setMessage(result.message);
       }
-      setInputs({
-        email: '',
-        password: ''
-      });
-
-      history.push('/profile')
 
 
     } catch (err) {
@@ -87,27 +93,33 @@ const Form = ({ title, isReg }) => {
     event.preventDefault();
     console.log(inputs);
     try {
-      const response = await fetch('http://localhost:3006/user/registration', {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/registration`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputs),
       })
       const result = await response.json();
+
+      //////
+      console.log('REGISTRATION', result);
+      //////
+
+
       if (response.ok) {
         dispatch(ACTION_TASKS.REGISTRATION(result));
-        dispatch(ACTION_TASKS.IS_ME(result.name));
+        dispatch(ACTION_TASKS.IS_ME());
+
+        setInputs({
+          name: '',
+          email: '',
+          password: ''
+        });
+
+        history.push(`/profile/${result.userID}`)
 
       } else {
-        console.log(result.message);
-        setMessage(true);
+        setMessage(result.message);
       }
-      setInputs({
-        name: '',
-        email: '',
-        password: ''
-      });
-
-      history.push('/profile')
 
 
     } catch (err) {
@@ -128,42 +140,60 @@ const Form = ({ title, isReg }) => {
           {title}
         </Typography>
         <form onSubmit={isReg ? registration : login} className={classes.form} noValidate>
-          {isReg && <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="name"
-            label="Name"
-            type="name"
-            id="name"
-            autoComplete="current-password"
-            onChange={handlerAll}
-            autoFocus
-          />}
+          {isReg &&
+            <>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="name"
+                label="Имя"
+                id="name"
+                autoComplete="current-password"
+                onChange={handlerAll}
+                autoFocus
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="surname"
+                label="Фамилия"
+                id="surname"
+                autoComplete="current-password"
+                onChange={handlerAll}
+                autoFocus
+              />
+            </>
+          }
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             onChange={handlerAll}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Пароль"
             type="password"
             id="password"
             autoComplete="current-password"
             onChange={handlerAll}
           />
+
+          <span style={{ color: "red", fontSize: "small" }}>{message}</span>
 
           <Button
             type="submit"
