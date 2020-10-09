@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5aebc6-d0f3-47e5-ab81-b59a114de332" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/node_modules/bcrypt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/bcrypt/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/controllers/organizationController/organization.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/organizationController/organization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/controllers/userControllers/registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/userControllers/registration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/routes/userRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/routes/userRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +62,8 @@
       <workItem from="1602154512322" duration="3331000" />
       <workItem from="1602177610320" duration="266000" />
       <workItem from="1602223027727" duration="1195000" />
+      <workItem from="1602224799625" duration="200000" />
+      <workItem from="1602225717625" duration="2396000" />
     </task>
     <servers />
   </component>

@@ -40,6 +40,12 @@ const Navbar = () => {
               </div>
             </>
           }
+          <div className="nav-item">
+            <Link className="nav-link" to="/videochat">video</Link>
+          </div>
+          <div className="nav-item">
+            <Link className="nav-link" to="/signin">chat</Link>
+          </div>
         </div>
 
 
