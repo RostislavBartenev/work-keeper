@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
-const User = require('../../models/userModel');
+const User = require('../../models/HASAN.user.model');
 const createToken = require('../../helpers/token');
-const userDstructurization = require('../../helpers/userDestr');
+const loginUserDstructurization = require('../../helpers/loginUserDestr');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -11,6 +11,7 @@ const login = async (req, res) => {
   if (email && password) {
     try {
       const user = await User.findOne({ email }).exec();
+      console.log('LOGIN', user);
       const isValidPass = await bcrypt.compare(password, user.password);
 
       if (isValidPass) {
@@ -19,12 +20,12 @@ const login = async (req, res) => {
         user.refreshToken = createToken('refresh', payload);
 
         user.save();
-        return res.json(userDstructurization(user));
+        return res.json(loginUserDstructurization(user));
       }
-      return res.sendStatus(401);
+      return res.status(401).json({ message: 'Неверный email или пароль' });
     } catch (error) {
       console.log(error);
-      return res.sendStatus(500);
+      return res.status(500).json({ message: 'Внутренняя ошибка сервера' });
     }
   }
   return res.sendStatus(204);

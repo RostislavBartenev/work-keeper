@@ -1,10 +1,12 @@
-const Organization = require('../../models/HASAN.organization.model')
+const Organization = require('../../models/HASAN.organization.model');
+const User = require('../../models/HASAN.user.model')
+
 const errorHandler = require('../../helpers/errorHandler')
 
-// ПОЛУЧАЕМ ОРГАНИЗАЦИЮ по idOfUser
-module.exports.getByIdofUser = async function (req, res) {
+// ПОЛУЧАЕМ ОРГАНИЗАЦИЮ по userID
+module.exports.getByUserID = async function (req, res) {
   try {
-    const org = await Organization.find({ creator: req.params.idOfUser })
+    const org = await Organization.find({ creator: req.params.userID })
     res.status(200).json(org)
   } catch (e) {
     errorHandler(res, e)
@@ -14,12 +16,21 @@ module.exports.getByIdofUser = async function (req, res) {
 // СОЗДАЕМ ОРГАНИЗАЦИЮ
 module.exports.create = async function (req, res) {
   try {
-    const { userID, name } = req.body
+    const { nameOrg, userID } = req.body
+    console.log('REQBODY', req.body);
+
     const newOrg = new Organization({
       creator: userID,
-      name: name
+      name: nameOrg
     });
+
     await newOrg.save();
+
+    await User.findOneAndUpdate(
+      { _id: userID },
+      { $push: { organization: newOrg._id } }
+    );
+
 
     res.status(201).json(newOrg)
   } catch (e) {

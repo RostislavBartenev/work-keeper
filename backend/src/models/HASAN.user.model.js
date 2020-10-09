@@ -20,6 +20,8 @@ const userSchema = new mongoose.Schema({
   refreshToken: {
     type: String,
   },
+  organization: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Organization' }],
+
 });
 
 module.exports = mongoose.model('User', userSchema);
