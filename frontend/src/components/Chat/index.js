@@ -1,12 +1,11 @@
-import React from 'react';
-import socket from '../SignIn/socket';
+import React, {useEffect} from 'react';
 
-function Chat({ users, messages, userName, roomId, onAddMessage }) {
+function Chat({ users, messages, userName, roomId, onAddMessage, socketRef }) {
     const [messageValue, setMessageValue] = React.useState('');
     const messagesRef = React.useRef(null);
 
     const onSendMessage = () => {
-        socket.emit('ROOM:NEW_MESSAGE', {
+      socketRef.current.emit('ROOM:NEW_MESSAGE', {
             userName,
             roomId,
             text: messageValue,
@@ -15,15 +14,13 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
         setMessageValue('');
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
         messagesRef.current.scrollTo(0, 99999);
     }, [messages]);
 
     return (
         <div className="chat">
             <div className="chat-users">
-                Комната: <b>{roomId}</b>
-                <hr />
                 <b>Онлайн ({users.length}):</b>
                 <ul>
                     {users.map((name, index) => (
@@ -33,8 +30,8 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
             </div>
             <div className="chat-messages">
                 <div ref={messagesRef} className="messages">
-                    {messages.map((message) => (
-                        <div className="message">
+                    {messages.map((message, index) => (
+                        <div key={index} className="message">
                             <p>{message.text}</p>
                             <div>
                                 <span>{message.userName}</span>

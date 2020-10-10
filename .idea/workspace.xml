@@ -3,9 +3,60 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5aebc6-d0f3-47e5-ab81-b59a114de332" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/aproba/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/aproba/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/are-we-there-yet/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/are-we-there-yet/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/bcrypt/lib/binding/napi-v3/bcrypt_lib.node" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/bcrypt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/bcrypt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/chownr/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/chownr/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/code-point-at/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/code-point-at/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/console-control-strings/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/console-control-strings/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/delegates/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/delegates/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/detect-libc/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/detect-libc/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/fs-minipass/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/fs-minipass/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/fs.realpath/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/fs.realpath/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/ansi-regex/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/ansi-regex/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/is-fullwidth-code-point/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/is-fullwidth-code-point/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/string-width/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/string-width/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/strip-ansi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/gauge/node_modules/strip-ansi/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/gauge/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/gauge/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/glob/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/glob/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/has-unicode/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/has-unicode/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/ignore-walk/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/ignore-walk/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/inflight/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/inflight/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/minipass/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/minipass/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/minizlib/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/minizlib/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/mkdirp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/mkdirp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/needle/node_modules/debug/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/needle/node_modules/debug/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/needle/node_modules/ms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/needle/node_modules/ms/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/needle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/needle/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/node-addon-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/node-addon-api/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/node-pre-gyp/node_modules/nopt/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/node-pre-gyp/node_modules/nopt/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/node-pre-gyp/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/node-pre-gyp/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/npm-bundled/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/npm-bundled/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/npm-normalize-package-bin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/npm-normalize-package-bin/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/npm-packlist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/npm-packlist/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/npmlog/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/npmlog/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/number-is-nan/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/number-is-nan/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/os-homedir/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/os-homedir/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/os-tmpdir/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/os-tmpdir/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/osenv/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/osenv/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/path-is-absolute/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/path-is-absolute/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/rimraf/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/rimraf/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/sax/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/sax/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/set-blocking/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/set-blocking/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/tar/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/tar/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/wide-align/node_modules/ansi-regex/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/wide-align/node_modules/ansi-regex/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/wide-align/node_modules/string-width/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/wide-align/node_modules/string-width/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/wide-align/node_modules/strip-ansi/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/wide-align/node_modules/strip-ansi/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/wide-align/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/wide-align/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/yallist/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/yallist/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Chat/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Chat/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/JoinBlock/index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignIn/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignIn/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignIn/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignIn/socket.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,13 +88,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend/src/routes" />
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/public" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -63,7 +114,12 @@
       <workItem from="1602177610320" duration="266000" />
       <workItem from="1602223027727" duration="1195000" />
       <workItem from="1602224799625" duration="200000" />
-      <workItem from="1602225717625" duration="2396000" />
+      <workItem from="1602225717625" duration="2561000" />
+      <workItem from="1602241986936" duration="545000" />
+      <workItem from="1602243349719" duration="204000" />
+      <workItem from="1602251606131" duration="173000" />
+      <workItem from="1602256614749" duration="1032000" />
+      <workItem from="1602330862316" duration="2926000" />
     </task>
     <servers />
   </component>

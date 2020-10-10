@@ -44,7 +44,7 @@ const Navbar = () => {
             <Link className="nav-link" to="/videochat">video</Link>
           </div>
           <div className="nav-item">
-            <Link className="nav-link" to="/signin">chat</Link>
+            <Link className="nav-link" to="/global-chat">chat</Link>
           </div>
         </div>
 

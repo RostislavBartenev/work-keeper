@@ -42,6 +42,7 @@ function App() {
        <Route exact path='/videochat' component={Room} />
 
 
+
         <Route exact path="/profile">
           <PrivateRoute exact path="/profile">
             <Profile />
@@ -52,9 +53,7 @@ function App() {
           {user.isMe ? <Redirect to="/profile" /> : <Redirect to="/user/registration" />}
         </Route>
 
-
-        {/* РУЧКА ДЛЯ ЧАТА  */}
-        <Route exact path='/signin'>
+        <Route exact path='/global-chat'>
           <SignIn />
         </Route>
 
