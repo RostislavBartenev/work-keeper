@@ -5,7 +5,7 @@ import Form from '../assets/Form'
 function LoginPage() {
 
   return (
-    <Form title={'Sign in'} />
+    <Form title={'Войти'} />
   );
 }
 

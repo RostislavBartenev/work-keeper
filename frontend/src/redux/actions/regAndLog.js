@@ -1,12 +1,11 @@
 import * as ACTIONS_TYPES from './actionTypes'
 
 const REGISTRATION = (userData) => {
-  console.log('ACTION_CREATOR_LOGIN', userData)
+  console.log('ACTION_CREATOR_REGISTRATION', userData)
   return {
     type: ACTIONS_TYPES.REGISTRATION,
     payload: {
-      ...userData,
-      isAuth: true,
+      ...userData
     }
   }
 };
@@ -18,27 +17,21 @@ const LOGIN = (userData) => {
     type: ACTIONS_TYPES.LOGIN,
     payload: {
       ...userData,
-      isAuth: true,
     }
   }
 }
 
-const LOGOUT = (name) => {
-  console.log(name, 'userdata')
-
+const LOGOUT = () => {
   return {
     type: ACTIONS_TYPES.LOGOUT,
-    payload: {
-      name,
-    }
+    payload: {}
   }
 }
 
-const IS_ME = (nameOfUser) => {
+const IS_ME = () => {
   return {
     type: ACTIONS_TYPES.IS_ME,
     payload: {
-      nameOfUser
     }
   }
 };

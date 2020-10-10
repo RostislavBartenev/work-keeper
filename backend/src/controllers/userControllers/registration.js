@@ -29,7 +29,7 @@ const registration = async (req, res) => {
       return res.json(userDestructuring(newUser));
     } catch (error) {
       console.log(error);
-      return res.status(422).json({ message: 'Email already exists in system' });
+      return res.status(422).json({ message: 'Пользователь с таким email уже существует' });
     }
   }
   return res.sendStatus(204);

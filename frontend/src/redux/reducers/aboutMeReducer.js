@@ -7,14 +7,12 @@ const aboutMeReducer = (state = {}, action) => {
       return {
         ...state,
         isMe: true,
-        isMyName: action.payload.nameOfUser
       }
 
     case ACTION_TYPES.IS_NOT_ME:
       return {
         ...state,
         isMe: false,
-        isMyName: ''
       }
 
 

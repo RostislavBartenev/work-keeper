@@ -5,7 +5,7 @@ const RegistrationPage = () => {
 
 
   return (
-    <Form title={'Sign Up'} isReg={true} />
+    <Form title={'Регистрация'} isReg={true} />
   )
 }
 
