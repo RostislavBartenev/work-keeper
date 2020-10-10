@@ -10,6 +10,7 @@ const cors = require('cors');
 const dbConnect = require('./src/dbConnect');
 const userRouter = require('./src/routes/userRouter');
 const orgRouter = require('./src/routes/organizationRouter');
+const departRouter = require('./src/routes/departmentRouter');
 
 
 dbConnect();
@@ -30,6 +31,7 @@ app.use('/user', userRouter);
 ///////////HASAN BACK////////
 
 app.use('/organization', orgRouter);
+app.use('/department', departRouter);
 
 
 ////////////////////////////

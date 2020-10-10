@@ -19,6 +19,7 @@
     "mongoose": "^5.10.8",
     "nodemon": "^2.0.4",
     "path": "^0.12.7",
+    "short-uuid": "^4.1.0",
     "socket.io": "^2.3.0"
   }
 }

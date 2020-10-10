@@ -3,7 +3,11 @@ const REGISTRATION = 'REGISTRATION',
   IS_ME = 'IS_ME',
   LOGOUT = 'LOGOUT',
   IS_NOT_ME = 'IS_NOT_ME',
-  ORG_ADD_ORG = 'ORG_ADD_ORG'
+
+  ORG_ADD_ORG = 'ORG_ADD_ORG',
+
+  DEP_ADD_DEP = 'DEP_ADD_DEP',
+  DEP_TO_ORG = 'DEP_TO_ORG'
 
 
 export {
@@ -12,5 +16,7 @@ export {
   IS_ME,
   LOGOUT,
   IS_NOT_ME,
-  ORG_ADD_ORG
+  ORG_ADD_ORG,
+  DEP_ADD_DEP,
+  DEP_TO_ORG
 }
