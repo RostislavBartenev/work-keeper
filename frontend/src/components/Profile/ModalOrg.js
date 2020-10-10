@@ -7,8 +7,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import * as ACTION_TASKS from "../../redux/actions/orgActions";
+import { useDispatch } from 'react-redux';
+
+
 export default function ModalOrg({ open, handleClose }) {
-  const [input, setInput] = useState('')
+  const [input, setInput] = useState('');
+
+  const dispatch = useDispatch();
 
   const addOrg = async () => {
     handleClose();
@@ -29,26 +35,16 @@ export default function ModalOrg({ open, handleClose }) {
       })
       const result = await response.json();
 
+
+
       //////
       console.log('ПОСЛЕ ДОБАВЛЕНИЯ ОРГ', result);
       //////
 
 
-      //   if (response.ok) {
-      //     dispatch(ACTION_TASKS.REGISTRATION(result));
-      //     dispatch(ACTION_TASKS.IS_ME());
-
-      //     setInputs({
-      //       name: '',
-      //       email: '',
-      //       password: ''
-      //     });
-
-      //     history.push('/profile')
-
-      //   } else {
-      //     setMessage(result.message);
-      //   }
+      if (response.ok) {
+        dispatch(ACTION_TASKS.ORG_ADD_ORG(result));
+      }
 
 
     } catch (err) {

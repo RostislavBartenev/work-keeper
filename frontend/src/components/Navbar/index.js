@@ -21,7 +21,7 @@ const Navbar = () => {
   const history = useHistory()
 
   const handleQuit = () => {
-    dispatch(ACTION_TASKS.LOGOUT(aboutMe.isMyName))
+    dispatch(ACTION_TASKS.LOGOUT())
     dispatch(ACTION_TASKS.IS_NOT_ME())
     localStorage.clear()
   }
@@ -33,8 +33,13 @@ const Navbar = () => {
           {aboutMe.isMe
             ? <>
               <span>{surname + ' ' + name}</span>
+
               <div className="nav-item ">
-                <Link to={`/profile/${userID}`} className="nav-link" onClick={handleQuit}>Личный кабинет</Link>
+                <Link to={'/'} className="nav-link">Главная</Link>
+              </div>
+
+              <div className="nav-item ">
+                <Link to={`/profile/${userID}`} className="nav-link">Личный кабинет</Link>
               </div>
               <div className="nav-item ">
                 <Link to="/user/registration" className="nav-link" onClick={handleQuit}>Выйти</Link>

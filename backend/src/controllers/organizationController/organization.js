@@ -4,9 +4,13 @@ const User = require('../../models/HASAN.user.model')
 const errorHandler = require('../../helpers/errorHandler')
 
 // ПОЛУЧАЕМ ОРГАНИЗАЦИЮ по userID
-module.exports.getByUserID = async function (req, res) {
+module.exports.getAllInfo = async function (req, res) {
+  const { userID } = req.query
+
   try {
-    const org = await Organization.find({ creator: req.params.userID })
+    const org = await Organization.find({ creator: userID }).populate({ path: 'Department' })
+    console.log(org);
+
     res.status(200).json(org)
   } catch (e) {
     errorHandler(res, e)

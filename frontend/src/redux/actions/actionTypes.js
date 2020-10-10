@@ -2,7 +2,8 @@ const REGISTRATION = 'REGISTRATION',
   LOGIN = 'LOGIN',
   IS_ME = 'IS_ME',
   LOGOUT = 'LOGOUT',
-  IS_NOT_ME = 'IS_NOT_ME'
+  IS_NOT_ME = 'IS_NOT_ME',
+  ORG_ADD_ORG = 'ORG_ADD_ORG'
 
 
 export {
@@ -10,5 +11,6 @@ export {
   LOGIN,
   IS_ME,
   LOGOUT,
-  IS_NOT_ME
+  IS_NOT_ME,
+  ORG_ADD_ORG
 }

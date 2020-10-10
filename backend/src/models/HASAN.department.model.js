@@ -6,9 +6,10 @@ const departmentSchema = new mongoose.Schema({
     type: String,
     require: true
   },
-  head: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  workers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  videoConf: String
+  head: [],
+  workers: [],
+  videoConf: String,
+  chat: String
 });
 
 module.exports = mongoose.model('Department', departmentSchema);

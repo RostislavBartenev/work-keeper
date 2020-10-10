@@ -17,19 +17,14 @@ const LOGIN = (userData) => {
     type: ACTIONS_TYPES.LOGIN,
     payload: {
       ...userData,
-      isAuth: true,
     }
   }
 }
 
-const LOGOUT = (name) => {
-  console.log(name, 'userdata')
-
+const LOGOUT = () => {
   return {
     type: ACTIONS_TYPES.LOGOUT,
-    payload: {
-      name,
-    }
+    payload: {}
   }
 }
 
