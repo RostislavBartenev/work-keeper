@@ -109,9 +109,8 @@ const Room = (props) => {
       })
 
     return () => {
-      console.log(userStream.current.getTracks().forEach(el => el.stop()))
+      userStream.current.getTracks().forEach(el => el.stop())
       socketRef.current.close()
-
     }
   }, []);
 

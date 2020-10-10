@@ -62,9 +62,7 @@ function App() {
           {aboutMe.isMe ? <MainPage /> : <Redirect to="/user/registration" />}
         </Route>
 
-
-        {/* РУЧКА ДЛЯ ЧАТА  */}
-        <Route exact path='/signin'>
+        <Route exact path='/global-chat'>
           <SignIn />
         </Route>
 
