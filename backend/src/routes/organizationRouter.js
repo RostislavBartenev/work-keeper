@@ -3,7 +3,7 @@ const orgController = require('../controllers/organizationController/organizatio
 
 const router = express.Router();
 
-router.get('/:userID', orgController.getByUserID);
+router.get('/', orgController.getAllInfo);
 router.post('/', orgController.create);
 router.patch('/:id', orgController.update);
 router.delete('/:id', orgController.delete);

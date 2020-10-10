@@ -25,7 +25,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Неверный email или пароль' });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ message: 'Внутренняя ошибка сервера' });
+      return res.status(500).json({ message: 'Неверный email или пароль' }); // или Внутренняя ошибка сервера
     }
   }
   return res.sendStatus(204);

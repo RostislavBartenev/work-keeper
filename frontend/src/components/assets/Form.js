@@ -37,8 +37,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Form = ({ title, isReg }) => {
   const classes = useStyles();
-
   const history = useHistory()
+
+  const formRef = React.useRef();
+
 
   const [inputs, setInputs] = useState({});
   const [message, setMessage] = useState('');
@@ -75,7 +77,7 @@ const Form = ({ title, isReg }) => {
           password: ''
         });
 
-        history.push(`/profile/${result.userID}`)
+        history.push('/')
 
       } else {
         // console.log(result.message);
@@ -115,7 +117,7 @@ const Form = ({ title, isReg }) => {
           password: ''
         });
 
-        history.push(`/profile/${result.userID}`)
+        history.push('/')
 
       } else {
         setMessage(result.message);
@@ -139,7 +141,7 @@ const Form = ({ title, isReg }) => {
         <Typography component="h1" variant="h5">
           {title}
         </Typography>
-        <form onSubmit={isReg ? registration : login} className={classes.form} noValidate>
+        <form ref={formRef} onSubmit={isReg ? registration : login} className={classes.form} noValidate>
           {isReg &&
             <>
               <TextField
@@ -153,6 +155,7 @@ const Form = ({ title, isReg }) => {
                 autoComplete="current-password"
                 onChange={handlerAll}
                 autoFocus
+                required
               />
               <TextField
                 variant="outlined"
@@ -164,7 +167,7 @@ const Form = ({ title, isReg }) => {
                 id="surname"
                 autoComplete="current-password"
                 onChange={handlerAll}
-                autoFocus
+                required
               />
             </>
           }
@@ -178,6 +181,8 @@ const Form = ({ title, isReg }) => {
             name="email"
             autoComplete="email"
             onChange={handlerAll}
+            required={true}
+            autoFocus
           />
 
           <TextField
@@ -191,6 +196,7 @@ const Form = ({ title, isReg }) => {
             id="password"
             autoComplete="current-password"
             onChange={handlerAll}
+            required={true}
           />
 
           <span style={{ color: "red", fontSize: "small" }}>{message}</span>
@@ -201,6 +207,7 @@ const Form = ({ title, isReg }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => formRef.current.reportValidity()}
           >
             {title}
           </Button>

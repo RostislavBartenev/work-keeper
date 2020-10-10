@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const dbConnect = require('./src/dbConnect');
 const userRouter = require('./src/routes/userRouter');
-const orgRouter = require('./src/routes/HASAN.orgRouter');
+const orgRouter = require('./src/routes/organizationRouter');
 
 
 dbConnect();
