@@ -19,13 +19,6 @@ const ORG_KEY_IN_DEP = (orgID) => {
   }
 };
 
-const DEP_ARR_AT_DEP = (depObject) => {
-  return {
-    type: ACTIONS_TYPES.DEP_ARR_AT_DEP,
-    payload: depObject
-  }
-};
-
 
 
 
@@ -33,5 +26,4 @@ const DEP_ARR_AT_DEP = (depObject) => {
 export {
   DEP_ADD_DEP,
   ORG_KEY_IN_DEP,
-  DEP_ARR_AT_DEP
 } 

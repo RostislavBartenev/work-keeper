@@ -7,7 +7,9 @@ const initialState = () => {
 
     organizations: [],
 
-    departments: {}
+    departments: {},
+
+    department: {}
   }
 
   return JSON.parse(localStorage.getItem('redux')) || initialValue

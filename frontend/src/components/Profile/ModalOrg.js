@@ -67,7 +67,6 @@ export default function ModalOrg({ open, handleClose }) {
           </DialogContentText>
         <form>
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Название"

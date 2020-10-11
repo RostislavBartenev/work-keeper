@@ -11,6 +11,7 @@ const dbConnect = require('./src/dbConnect');
 const userRouter = require('./src/routes/userRouter');
 const orgRouter = require('./src/routes/organizationRouter');
 const departRouter = require('./src/routes/departmentRouter');
+const workerRouter = require('./src/routes/workerRouter');
 
 
 dbConnect();
@@ -32,6 +33,7 @@ app.use('/user', userRouter);
 
 app.use('/organization', orgRouter);
 app.use('/department', departRouter);
+app.use('/worker', workerRouter);
 
 
 ////////////////////////////
