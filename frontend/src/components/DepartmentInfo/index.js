@@ -4,28 +4,29 @@ import { useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom'
 import DepartmentCard from '../DepartmentCard';
 import ModalDepart from './ModalWorker';
+import ModalWorker from "./ModalWorker";
 
 
 // ЧЕКНУТЬ ВСЁ
-const DepartmentInfo = ({ departmentsArr, organizations }) => {
+const DepartmentInfo = ({ organizations }) => {
   console.log('RENDER DepartmentInfo');
 
-  console.log(departmentsArr);
+  const departments = useSelector(state => state.departments)
+
   const { id } = useParams()
+
   const [dep, setDep] = useState({})
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
   const workersArr = useSelector(state => state.departments[id]) || []
-  console.log('depArray', depArray);
+  console.log('depArray', workersArr);
 
   useEffect(() => {
 
-    const findDep = departmentsArr.find(el => el._id === id)
-    console.log('FFFFFFFFFF', findDep);
-    if (findDep) {
-      setDep({ ...findDep })
-    }
+    const { _id: orgID } = organizations.find(el => el.departments.find(element => element === id))
+
+    if (orgID) setDep(departments[orgID].find(el => el._id = id))
 
   }, [])
 
@@ -41,26 +42,25 @@ const DepartmentInfo = ({ departmentsArr, organizations }) => {
     setOpen(false);
   };
 
+  console.log(dep)
+
   return (
     <>
       <div>Страница отдела</div>
-      { Object.keys(org).length ?
+      { Object.keys(dep).length ?
         <div className="d-flex flex-column align-items-center">
           <h1>
-            {org.name}
+            {dep.name}
           </h1>
-          <p>Добавьте email сотрудников, работающих в данном отделе </p>
-
-
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
             + Добавить сотрудника
           </Button>
-          {open && <ModalWorker open={open} handleClose={handleClose} orgID={org._id} />}
+          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} />}
 
           <div>
-            {depArray.length
+            {dep.length
               ? <ul className="org-list ">
-                {depArray.map((dep) => {
+                {dep.map((dep) => {
                   console.log('>>>>>>>>>>', dep);
                   return (
                     <Link to={`/department/${dep._id}`} key={dep._id}>

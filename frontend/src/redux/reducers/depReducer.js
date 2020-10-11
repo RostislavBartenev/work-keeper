@@ -18,14 +18,6 @@ const depReducer = (state = {}, action) => {
         [action.payload.orgID]: []
       }
 
-    case ACTION_TYPES.DEP_ARR_AT_DEP:
-      return {
-        ...state,
-        departmentsArr: [
-          ...state.departmentsArr,
-          action.payload
-        ]
-      }
 
 
 

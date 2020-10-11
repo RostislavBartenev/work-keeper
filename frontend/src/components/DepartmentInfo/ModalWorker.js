@@ -12,22 +12,22 @@ import * as ACTION_ORG from "../../redux/actions/orgActions";
 import { useDispatch } from 'react-redux';
 
 
-export default function ModalWorker({ open, handleClose, orgID }) {
+export default function ModalWorker({ handleClose, _id: depID, open }) {
+
+  console.log(depID)
+
   const [input, setInput] = useState('');
 
   const dispatch = useDispatch();
 
-  const addOrg = async () => {
+  const addWorker = async () => {
     handleClose();
 
-    const { user: { userID } } = JSON.parse(localStorage.getItem('redux'));
-    console.log(userID);
 
     try {
       const data = {
-        nameDepart: input,
-        userID,
-        orgID: orgID
+        worker: input,
+        depID: depID
       }
 
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department`, {
@@ -45,8 +45,8 @@ export default function ModalWorker({ open, handleClose, orgID }) {
 
 
       if (response.ok) {
-        dispatch(ACTION_DEP.DEP_ADD_DEP(orgID, result));
-        dispatch(ACTION_ORG.DEP_TO_ORG(orgID, result._id));
+        dispatch(ACTION_DEP.DEP_ADD_DEP(depID, result));
+        dispatch(ACTION_ORG.DEP_TO_ORG(depID, result._id));
         dispatch(ACTION_DEP.DEP_ARR_AT_DEP(result));
       }
 
@@ -62,16 +62,13 @@ export default function ModalWorker({ open, handleClose, orgID }) {
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">Добавить отдел</DialogTitle>
+      <DialogTitle id="form-dialog-title">Добавьте email сотрудника</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          Введите название отдела/подразделения:
-          </DialogContentText>
         <form>
           <TextField
             margin="dense"
             id="name"
-            label="Название"
+            label="Email"
             type="text"
             fullWidth
             onChange={(e) => setInput(e.target.value)}
@@ -83,7 +80,7 @@ export default function ModalWorker({ open, handleClose, orgID }) {
         <Button onClick={handleClose} color="primary">
           Отмена
           </Button>
-        <Button onClick={addOrg} color="primary">
+        <Button onClick={addWorker} color="primary">
           Добавить
           </Button>
       </DialogActions>
