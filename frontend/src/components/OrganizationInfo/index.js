@@ -14,7 +14,7 @@ const OrganizationInfo = ({ organizations }) => {
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
-  const depArray = useSelector(state => state.departments.id) || []
+  const depArray = useSelector(state => state.departments[id]) || []
   console.log('depArray', depArray);
 
   useEffect(() => {
@@ -74,7 +74,6 @@ const OrganizationInfo = ({ organizations }) => {
 
           <button onClick={backHandler} type="button" className="btn btn-primary mt-5">Back</button>
 
-          {/* DEPARTMENTS расписать */}
         </div>
         : null}
 

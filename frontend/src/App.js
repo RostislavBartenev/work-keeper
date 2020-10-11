@@ -21,6 +21,7 @@ function App() {
   const aboutMe = useSelector(state => state.aboutMe);
   const user = useSelector(state => state.user)
   const organizations = useSelector(state => state.organizations)
+  const departmentsArr = useSelector(state => state.departments.departmentsArr)
 
 
   console.log(user);
@@ -48,6 +49,9 @@ function App() {
           <OrganizationInfo organizations={organizations} />
         </Route>
 
+        <Route exact path="/department/:id">
+          <DepartmentInfo departmentsArr={departmentsArr} organizations={organizations} />
+        </Route>
 
 
 

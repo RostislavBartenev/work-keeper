@@ -12,7 +12,7 @@ import * as ACTION_ORG from "../../redux/actions/orgActions";
 import { useDispatch } from 'react-redux';
 
 
-export default function ModalDepart({ open, handleClose, orgID }) {
+export default function ModalWorker({ open, handleClose, orgID }) {
   const [input, setInput] = useState('');
 
   const dispatch = useDispatch();
