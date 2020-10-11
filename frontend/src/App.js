@@ -14,6 +14,7 @@ import Profile from './components/Profile';
 import Navbar from './components/Navbar';
 import MainPage from './components/MainPage'
 import OrganizationInfo from './components/OrganizationInfo';
+import DepartmentInfo from "./components/DepartmentInfo";
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
   const aboutMe = useSelector(state => state.aboutMe);
   const user = useSelector(state => state.user)
   const organizations = useSelector(state => state.organizations)
-  const departmentsArr = useSelector(state => state.departments.departmentsArr)
+
 
 
   console.log(user);
@@ -50,7 +51,7 @@ function App() {
         </Route>
 
         <Route exact path="/department/:id">
-          <DepartmentInfo departmentsArr={departmentsArr} organizations={organizations} />
+          <DepartmentInfo organizations={organizations} />
         </Route>
 
 
