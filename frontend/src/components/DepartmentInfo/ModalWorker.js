@@ -7,12 +7,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import * as ACTION_ORG from "../../redux/actions/orgActions";
 import * as ACTION_DEP from "../../redux/actions/depActions";
+import * as ACTION_ORG from "../../redux/actions/orgActions";
 import { useDispatch } from 'react-redux';
 
 
-export default function ModalOrg({ open, handleClose }) {
+export default function ModalWorker({ open, handleClose, orgID }) {
   const [input, setInput] = useState('');
 
   const dispatch = useDispatch();
@@ -25,11 +25,12 @@ export default function ModalOrg({ open, handleClose }) {
 
     try {
       const data = {
-        nameOrg: input,
-        userID
+        nameDepart: input,
+        userID,
+        orgID: orgID
       }
 
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/organization`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
@@ -39,13 +40,14 @@ export default function ModalOrg({ open, handleClose }) {
 
 
       //////
-      console.log('ПОСЛЕ ДОБАВЛЕНИЯ ОРГ', result);
+      console.log('ПОСЛЕ ДОБАВЛЕНИЯ ДЕПАРТМЕНТА', result);
       //////
 
 
       if (response.ok) {
-        dispatch(ACTION_ORG.ORG_ADD_ORG(result));
-        dispatch(ACTION_DEP.ORG_KEY_IN_DEP(result._id));
+        dispatch(ACTION_DEP.DEP_ADD_DEP(orgID, result));
+        dispatch(ACTION_ORG.DEP_TO_ORG(orgID, result._id));
+        dispatch(ACTION_DEP.DEP_ARR_AT_DEP(result));
       }
 
 
@@ -60,14 +62,13 @@ export default function ModalOrg({ open, handleClose }) {
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">Добавить организацию</DialogTitle>
+      <DialogTitle id="form-dialog-title">Добавить отдел</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Введите название вашей организации/предприятия:
+          Введите название отдела/подразделения:
           </DialogContentText>
         <form>
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Название"

@@ -3,8 +3,13 @@ const initialState = () => {
     aboutMe: {},
 
     user: {
-
     },
+
+    organizations: [],
+
+    departments: {
+      departmentsArr: []
+    }
   }
 
   return JSON.parse(localStorage.getItem('redux')) || initialValue
