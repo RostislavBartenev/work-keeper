@@ -4,8 +4,14 @@ import axios from 'axios';
 import reducer from './reducer';
 import Chat from '../Chat';
 import io from "socket.io-client";
+import {useSelector} from "react-redux";
 
 function App() {
+
+    const {name, surname} = useSelector(state => state.user)
+
+    const chat = '123'
+    console.log(chat)
 
     const socketRef = useRef();
 
@@ -17,7 +23,7 @@ function App() {
         messages: [],
     });
 
-    let obj = {roomId: '123', userName: 'Rostislav'}
+    let obj = {roomId: chat, userName: name + ' ' + surname}
 
     useEffect(  () => {
 

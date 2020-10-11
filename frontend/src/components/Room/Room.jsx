@@ -1,21 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-import styled from "styled-components";
 
-const Container = styled.div`
-    padding: 20px;
-    display: flex;
-    height: 100vh;
-    width: 90%;
-    margin: auto;
-    flex-wrap: wrap;
-`;
+import MicNoneIcon from '@material-ui/icons/MicNone';
+import MicOffOutlinedIcon from '@material-ui/icons/MicOffOutlined';
 
-const StyledVideo = styled.video`
-    height: 40%;
-    width: 50%;
-`;
+import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
+import VideocamOffOutlinedIcon from '@material-ui/icons/VideocamOffOutlined';
+
+import './room.sass'
 
 const Video = (props) => {
   const ref = useRef();
@@ -28,15 +21,10 @@ const Video = (props) => {
   }, []);
 
   return (
-    <StyledVideo playsInline autoPlay ref={ref} />
+    <video autoPlay ref={ref} />
   );
 }
 
-
-const videoConstraints = {
-  height: window.innerHeight / 2,
-  width: window.innerWidth / 2
-};
 
 const Room = (props) => {
   const [peers, setPeers] = useState([]);
@@ -51,7 +39,7 @@ const Room = (props) => {
 
   useEffect(() => {
     socketRef.current = io.connect("/");
-    navigator.mediaDevices.getUserMedia({ video: videoConstraints, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
         userVideo.current.srcObject = stream;
         userStream.current = stream;
@@ -157,17 +145,28 @@ const Room = (props) => {
 
 
   return (
-    <Container>
-      {console.log('Render comp')}
-      <StyledVideo muted ref={userVideo} autoPlay playsInline />
-      <button onClick={() => setMicroParams(prev => !prev)}>Micro</button>
-      <button onClick={() => setVideoParams(prev => !prev)}>Video</button>
-      {peers.map(peer => {
-        return (
-          <Video key={peer.peerID} peer={peer.peer} />
-        );
-      })}
-    </Container>
+    <div className="videochat-container">
+      <div className="videochat-user">
+        <video muted ref={userVideo} autoPlay />
+        <div className="videochat-user-buttons">
+          {microParams ? <button onClick={() => setMicroParams(prev => !prev)}><MicNoneIcon /> </button> :
+            <button className='red' onClick={() => setMicroParams(prev => !prev)}><MicOffOutlinedIcon /> </button>
+          }
+
+          {videoParams ? <button onClick={() => setVideoParams(prev => !prev)}><VideocamOutlinedIcon /> </button> :
+            <button className='red' onClick={() => setVideoParams(prev => !prev)}><VideocamOffOutlinedIcon /> </button>
+          }
+        </div>
+      </div>
+      <div className="videochat-companions">
+        {peers.map(peer => {
+
+          return (
+            <Video key={peer.peerID} peer={peer.peer} />
+          );
+        })}
+      </div>
+    </div>
   );
 };
 

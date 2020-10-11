@@ -1,0 +1,62 @@
+/*#000B28	#040C23	#000922	#6386E4	#B3C0E4*/
+
+.videochat
+  &-container
+    width: 100%
+    height: calc(100vh - 110px)
+    background-color: #000B28
+    display: flex
+    justify-content: center
+    flex-direction: column
+    align-items: center
+  &-user
+    display: flex
+    justify-content: center
+    width: 30%
+    margin: 0 auto
+    position: relative
+    video
+      width: 100%
+      height: 100%
+      border-radius: 10px
+    &-buttons
+      display: flex
+      position: absolute
+      bottom: 10px
+      button
+        border-radius: 50%
+        border: none
+        display: flex
+        justify-content: center
+        align-items: center
+        text-align: center
+        width: 48px
+        height: 48px
+        margin: 10px
+        transition: .4s
+        &:hover
+          box-shadow: 2px 2px 0 0 rgba(0,0,0,0.75)
+          background-color: red
+          cursor: pointer
+
+  &-companions
+    display: flex
+    margin-top: 50px
+    justify-content: space-around
+    height: 150px
+    overflow-x: scroll
+    width: 500px
+    video
+      width: 50%
+      height: 100%
+      border-radius: 25px
+
+
+
+
+
+.red
+  background-color: red
+
+
+
