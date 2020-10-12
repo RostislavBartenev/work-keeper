@@ -12,7 +12,7 @@ import * as ACTION_ORG from "../../redux/actions/orgActions";
 import { useDispatch } from 'react-redux';
 
 
-export default function ModalWorker({ handleClose, _id: depID, open }) {
+export default function ModalWorker({ handleClose, _id: depID, open, orgID }) {
 
   console.log(depID)
 
@@ -22,16 +22,13 @@ export default function ModalWorker({ handleClose, _id: depID, open }) {
 
   const addWorker = async () => {
     handleClose();
-
-
     try {
       const data = {
-        worker: input,
-        depID: depID
+        workerEmail: input,
       }
 
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department`, {
-        method: 'POST',
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department/${depID}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
@@ -40,14 +37,14 @@ export default function ModalWorker({ handleClose, _id: depID, open }) {
 
 
       //////
-      console.log('ПОСЛЕ ДОБАВЛЕНИЯ ДЕПАРТМЕНТА', result);
+      console.log('ПОСЛЕ ДОБАВЛЕНИЯ WORKER-a', result);
       //////
 
 
       if (response.ok) {
-        dispatch(ACTION_DEP.DEP_ADD_DEP(depID, result));
-        dispatch(ACTION_ORG.DEP_TO_ORG(depID, result._id));
-        dispatch(ACTION_DEP.DEP_ARR_AT_DEP(result));
+        // НУЖНА ЛОГИКА 
+        // dispatch(ACTION_DEP.DEP_ADD_DEP(depID, result));
+        // dispatch(ACTION_ORG.DEP_TO_ORG(depID, result._id));
       }
 
 

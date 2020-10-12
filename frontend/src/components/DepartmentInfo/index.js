@@ -1,34 +1,46 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom'
-import DepartmentCard from '../DepartmentCard';
-import ModalDepart from './ModalWorker';
 import ModalWorker from "./ModalWorker";
+import * as ACTION_DEP_ACTUAL from "../../redux/actions/depActualActions";
 
+import WorkersList from '../WorkersList';
 
 // ЧЕКНУТЬ ВСЁ
 const DepartmentInfo = ({ organizations }) => {
   console.log('RENDER DepartmentInfo');
 
-  const departments = useSelector(state => state.departments)
-
   const { id } = useParams()
+  const dispatch = useDispatch()
 
   const [dep, setDep] = useState({})
+  const [orgID, setOrgID] = useState('')
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
-  const workersArr = useSelector(state => state.departments[id]) || []
-  console.log('depArray', workersArr);
+  const departments = useSelector(state => state.departments)
+
+  const workersArr = useSelector(state => state.department.workers) || []
+  // console.log('workersArr', workersArr);
+
+
 
   useEffect(() => {
 
-    const { _id: orgID } = organizations.find(el => el.departments.find(element => element === id))
-
-    if (orgID) setDep(departments[orgID].find(el => el._id = id))
-
+    const { _id: orgID } = organizations.find(el => el.departments.find(element => element === id));
+    if (orgID) {
+      setDep(departments[orgID].find(el => el._id = id));
+      setOrgID(orgID)
+    };
   }, [])
+
+  useEffect(() => {
+    dispatch(ACTION_DEP_ACTUAL.DEP_ACTUAL(dep));
+
+  }, [dep])
+
+
 
   const backHandler = () => {
     history.goBack()
@@ -42,7 +54,6 @@ const DepartmentInfo = ({ organizations }) => {
     setOpen(false);
   };
 
-  console.log(dep)
 
   return (
     <>
@@ -55,30 +66,15 @@ const DepartmentInfo = ({ organizations }) => {
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
             + Добавить сотрудника
           </Button>
-          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} />}
+          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} orgID={orgID} />}
 
           <div>
-            {dep.length
-              ? <ul className="org-list ">
-                {dep.map((dep) => {
-                  console.log('>>>>>>>>>>', dep);
-                  return (
-                    <Link to={`/department/${dep._id}`} key={dep._id}>
-                      <li className="org-list-task">
-                        <DepartmentCard {...dep} />
-                      </li>
-                    </Link>
-                  )
-                })}
-              </ul>
-              : <p>Нет добавленных сотрудников</p>
-            }
+            <WorkersList workersArr={workersArr} />
           </div>
 
 
           <button onClick={backHandler} type="button" className="btn btn-primary mt-5">Back</button>
 
-          {/* DEPARTMENTS расписать */}
         </div>
         : null}
 

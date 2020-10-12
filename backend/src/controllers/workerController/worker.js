@@ -6,7 +6,7 @@ const short = require('short-uuid');
 
 const errorHandler = require('../../helpers/errorHandler')
 
-// ПОЛУЧАЕМ ДЕПАРТМЕНТ по userID
+// ПОЛУЧАЕМ WORKER по userID
 module.exports.getAllInfo = async function (req, res) {
   const { userID } = req.query
 
@@ -20,7 +20,7 @@ module.exports.getAllInfo = async function (req, res) {
   }
 }
 
-// СОЗДАЕМ ДЕПАРТМЕНТ
+// СОЗДАЕМ WORKER-а 
 module.exports.create = async function (req, res) {
   try {
     const { nameDepart, userID, orgID } = req.body
@@ -52,12 +52,12 @@ module.exports.create = async function (req, res) {
 
 }
 
-// УДАЛЯЕМ ДЕПАРТМЕНТ
+// УДАЛЯЕМ WORKER
 module.exports.delete = async function (req, res) {
   try {
-    await Department.remove({ _id: req.params.id })
+    await Organization.remove({ _id: req.params.id })
     res.status(200).json({
-      message: 'Департамент удален'
+      message: 'Организация удалена'
     })
 
   } catch (e) {
@@ -66,26 +66,10 @@ module.exports.delete = async function (req, res) {
 
 }
 
-// ОБНОВЛЯЕМ ДЕПАРТМЕНТ
-module.exports.update = async function (req, res) {
-  const { id: depID } = req.params
-  const { workerEmail } = req.body
-  console.log(workerEmail);
-  console.log(depID);
-
+// ОБНОВЛЯЕМ WORKER
+module.exports.update = function (req, res) {
   try {
-    const updateUser = await User.findOneAndUpdate(
-      { email: workerEmail },
-      { $push: { departments: depID } },
-      { new: true }
-    );
-
-
-    await Department.findOneAndUpdate(
-      { _id: depID },
-      { $push: { workers: workerEmail } }
-    );
-    res.status(200).json(updateUser)
+    console.log(req.params);
   } catch (e) {
     errorHandler(res, e)
   }

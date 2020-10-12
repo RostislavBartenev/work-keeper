@@ -56,12 +56,12 @@ const OrganizationInfo = ({ organizations }) => {
           {open && <ModalDepart open={open} handleClose={handleClose} orgID={org._id} />}
 
           <div>
-            {depArray.length ? <ul className="org-list ">
+            {depArray.length ? <ul className="dep-list ">
               {depArray.map((dep) => {
                 console.log('>>>>>>>>>>', dep);
                 return (
                   <Link to={`/department/${dep._id}`} key={dep._id}>
-                    <li className="org-list-task">
+                    <li className="dep-list-task">
                       <DepartmentCard {...dep} />
                     </li>
                   </Link>

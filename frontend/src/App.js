@@ -15,7 +15,7 @@ import LeftMenu from './components/Navbar/Navbar';
 import MainPage from './components/MainPage'
 import OrganizationInfo from './components/OrganizationInfo';
 import DepartmentInfo from "./components/DepartmentInfo";
-
+import WorkerInfo from './components/WorkerInfo'
 
 function App() {
 
@@ -31,44 +31,46 @@ function App() {
 
       <LeftMenu >
 
-       <Switch>
+        <Switch>
 
 
-         <Route exact path="/user/registration">
-           <RegistrationPage />
-         </Route>
+          <Route exact path="/user/registration">
+            <RegistrationPage />
+          </Route>
 
-         <Route exact path="/user/login">
-           <LoginPage />
-         </Route>
-
-
-         <Route exact path="/organization/:id">
-           <OrganizationInfo organizations={organizations} />
-         </Route>
-
-         <Route exact path="/department/:id">
-           <DepartmentInfo organizations={organizations} />
-         </Route>
+          <Route exact path="/user/login">
+            <LoginPage />
+          </Route>
 
 
+          <Route exact path="/organization/:id">
+            <OrganizationInfo organizations={organizations} />
+          </Route>
 
-         <Route exact path='/videochat' component={Room} />
+          <Route exact path="/department/:id">
+            <DepartmentInfo organizations={organizations} />
+          </Route>
+
+          <Route exact path="/worker/:id">
+            <WorkerInfo organizations={organizations} />
+          </Route>
+
+          <Route exact path='/videochat' component={Room} />
 
 
-         <PrivateRoute exact path={`/profile/:id`}>
-           <Profile />
-         </PrivateRoute>
+          <PrivateRoute exact path={`/profile/:id`}>
+            <Profile />
+          </PrivateRoute>
 
-         <Route exact path="/">
-           {aboutMe.isMe ? <MainPage /> : <Redirect to="/user/registration" />}
-         </Route>
+          <Route exact path="/">
+            {aboutMe.isMe ? <MainPage /> : <Redirect to="/user/registration" />}
+          </Route>
 
-         <Route exact path='/global-chat'>
-           <SignIn />
-         </Route>
+          <Route exact path='/global-chat'>
+            <SignIn />
+          </Route>
 
-       </Switch>
+        </Switch>
       </LeftMenu>
     </div>
   );

@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as ACTION_TASKS from "../../redux/actions/regAndLog";
 
@@ -147,7 +147,6 @@ const Form = ({ title, isReg }) => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="name"
                 label="Имя"
@@ -160,7 +159,6 @@ const Form = ({ title, isReg }) => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="surname"
                 label="Фамилия"
@@ -174,7 +172,6 @@ const Form = ({ title, isReg }) => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email"
@@ -188,7 +185,6 @@ const Form = ({ title, isReg }) => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             label="Пароль"

@@ -47,7 +47,6 @@ export default function ModalDepart({ open, handleClose, orgID }) {
       if (response.ok) {
         dispatch(ACTION_DEP.DEP_ADD_DEP(orgID, result));
         dispatch(ACTION_ORG.DEP_TO_ORG(orgID, result._id));
-        dispatch(ACTION_DEP.DEP_ARR_AT_DEP(result));
       }
 
 
