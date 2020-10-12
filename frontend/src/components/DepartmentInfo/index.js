@@ -15,14 +15,19 @@ const DepartmentInfo = ({ organizations }) => {
   const dispatch = useDispatch()
 
   const [dep, setDep] = useState({})
+
+  const [addWorker, setAddWorker] = useState({})
+
   const [orgID, setOrgID] = useState('')
   const history = useHistory()
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [mesFromBack, setMesFromBack] = useState('');
+
 
   const departments = useSelector(state => state.departments)
 
-  const workersArr = useSelector(state => state.department.workers) || []
-  // console.log('workersArr', workersArr);
+  const workersArr = useSelector(state => state.department.workers)
+  console.log('workersArr', workersArr);
 
 
 
@@ -30,15 +35,17 @@ const DepartmentInfo = ({ organizations }) => {
 
     const { _id: orgID } = organizations.find(el => el.departments.find(element => element === id));
     if (orgID) {
-      setDep(departments[orgID].find(el => el._id = id));
+      const foundDep = departments[orgID].find(el => el._id = id)
+      setDep(foundDep);
       setOrgID(orgID)
+      dispatch(ACTION_DEP_ACTUAL.DEP_ACTUAL(foundDep));
     };
-  }, [])
+  }, [addWorker])
 
-  useEffect(() => {
-    dispatch(ACTION_DEP_ACTUAL.DEP_ACTUAL(dep));
+  // useEffect(() => {
+  //   console.log(dep, 'DEPPPPPPPPPPPPPPPPP');
 
-  }, [dep])
+  // }, [dep, setDep])
 
 
 
@@ -66,10 +73,10 @@ const DepartmentInfo = ({ organizations }) => {
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
             + Добавить сотрудника
           </Button>
-          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} orgID={orgID} />}
+          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} orgID={orgID} setAddWorker={setAddWorker} setMesFromBack={setMesFromBack} />}
 
           <div>
-            <WorkersList workersArr={workersArr} />
+            <WorkersList workersArr={workersArr} mesFromBack={mesFromBack} />
           </div>
 
 

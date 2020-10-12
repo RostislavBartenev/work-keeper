@@ -19,6 +19,14 @@ const ORG_KEY_IN_DEP = (orgID) => {
   }
 };
 
+const WORKER_TO_DEP = (orgID, depID, workerObj) => {
+  return {
+    type: ACTIONS_TYPES.WORKER_TO_DEP,
+    payload: {
+      orgID, depID, workerObj
+    }
+  }
+};
 
 
 
@@ -26,4 +34,5 @@ const ORG_KEY_IN_DEP = (orgID) => {
 export {
   DEP_ADD_DEP,
   ORG_KEY_IN_DEP,
+  WORKER_TO_DEP
 } 

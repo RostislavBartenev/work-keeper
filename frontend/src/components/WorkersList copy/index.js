@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import WorkerInfo from '../WorkerInfo';
 
 
-const WorkersList = ({ workersArr = [], mesFromBack }) => {
+const WorkersList = ({ workersArr = [] }) => {
 
   console.log('WorkersList_workersArr', workersArr);
   return (
@@ -18,18 +18,13 @@ const WorkersList = ({ workersArr = [], mesFromBack }) => {
             return (
               <Link to={`/worker/${worker._id}`} key={worker._id}>
                 <li className="worker-list-task list-group-item">
-                  {worker.name + ' ' + worker.surname}
+                  <WorkerInfo {...worker} />
                 </li>
               </Link>
             )
           })}
         </ul>
-        :
-        <>
-          <p>Нет добавленных сотрудников</p>
-          {mesFromBack &&
-            <p style={{ color: "red", fontSize: "small" }}>{mesFromBack}</p>}
-        </>
+        : <p>Нет добавленных сотрудников</p>
       }
 
     </>

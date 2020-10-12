@@ -80,12 +80,22 @@ module.exports.update = async function (req, res) {
       { new: true }
     );
 
+    const dataToFront = {
+      email: workerEmail,
+      name: updateUser.name,
+      surname: updateUser.surname,
+      _id: updateUser._id
+    }
 
     await Department.findOneAndUpdate(
       { _id: depID },
-      { $push: { workers: workerEmail } }
+      {
+        $push: {
+          workers: dataToFront
+        }
+      }
     );
-    res.status(200).json(updateUser)
+    res.status(200).json(dataToFront)
   } catch (e) {
     errorHandler(res, e)
   }

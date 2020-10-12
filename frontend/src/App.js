@@ -49,13 +49,14 @@ function App() {
             <OrganizationInfo organizations={organizations} />
           </Route>
 
+          <Route exact path="/worker/:id">
+            <WorkerInfo organizations={organizations} />
+          </Route>
+
           <Route exact path="/department/:id">
             <DepartmentInfo organizations={organizations} />
           </Route>
 
-          <Route exact path="/worker/:id">
-            <WorkerInfo organizations={organizations} />
-          </Route>
 
           <Route exact path='/videochat' component={Room} />
 

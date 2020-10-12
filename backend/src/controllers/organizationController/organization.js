@@ -8,7 +8,15 @@ module.exports.getAllInfo = async function (req, res) {
   const { userID } = req.query
 
   try {
-    const org = await Organization.find({ creator: userID }).populate({ path: 'Department' })
+    // const org = await Organization.find({ creator: userID }).populate({ path: 'Department' })
+    /*
+     MAIN PAGE
+    User populate organizations departments
+  
+    res  USer,
+  
+    одинаковые EMAIL-ы
+    */
     console.log(org);
 
     res.status(200).json(org)
