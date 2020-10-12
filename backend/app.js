@@ -124,10 +124,15 @@ io.on('connection', socket => {
       room = room.filter(id => id !== socket.id)
       users[roomID] = room
     }
+
     socket.broadcast.emit('user left', socket.id)
   })
 
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'))
+})
 
 server.listen(app.locals.settings.port, () => {
   console.log('Server started on port ' + app.locals.settings.port);

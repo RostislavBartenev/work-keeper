@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5aebc6-d0f3-47e5-ab81-b59a114de332" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Navbar/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Navbar/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignIn/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignIn/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +68,10 @@
       <workItem from="1602256614749" duration="1032000" />
       <workItem from="1602330862316" duration="3245000" />
       <workItem from="1602335228475" duration="381000" />
-      <workItem from="1602410803819" duration="11072000" />
+      <workItem from="1602410803819" duration="11581000" />
+      <workItem from="1602423981076" duration="1021000" />
+      <workItem from="1602481316193" duration="671000" />
+      <workItem from="1602484441722" duration="3949000" />
     </task>
     <servers />
   </component>
