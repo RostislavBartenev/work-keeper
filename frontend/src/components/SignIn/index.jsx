@@ -1,6 +1,8 @@
 import React, {useEffect, useReducer, useRef} from 'react';
 import axios from 'axios';
 
+import './index.css'
+
 import reducer from './reducer';
 import Chat from '../Chat';
 import io from "socket.io-client";
@@ -75,7 +77,7 @@ function App() {
     }, []);
 
     return (
-      <Chat {...state} socketRef={socketRef} onAddMessage={addMessage} />
+      <Chat userInfo={name + ' ' + surname} {...state} socketRef={socketRef} onAddMessage={addMessage} />
     );
 }
 
