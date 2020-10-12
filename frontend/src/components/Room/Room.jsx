@@ -44,7 +44,7 @@ const Room = (props) => {
         userVideo.current.srcObject = stream;
         userStream.current = stream;
 
-        userStream.current.getAudioTracks()[0].enabled = microParams; // отключить микрофон
+        userStream.current.getAudioTracks()[0].enabled = microParams;
 
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", users => {
@@ -64,8 +64,11 @@ const Room = (props) => {
         })
 
         socketRef.current.on("user joined", payload => {
-          console.log('user join')
+
           const peer = addPeer(payload.signal, payload.callerID, stream);
+
+          console.log(peersRef.current)
+
           peersRef.current.push({
             peerID: payload.callerID,
             peer,
@@ -76,7 +79,14 @@ const Room = (props) => {
             peerID: payload.callerID
           }
 
-          setPeers(users => [...users, peerObj]);
+          console.log(peersRef.current, peerObj, '!!!!!!!')
+
+          console.log(peerObj.peer._id, 'peer id')
+
+
+          setPeers(users => users.map(el => el.peer._id !== peerObj.peer._id ? {...el} : {...peerObj} ));
+          // setPeers(users => [...users, peerObj]);
+
         });
 
         socketRef.current.on("receiving returned signal", payload => {
@@ -127,7 +137,6 @@ const Room = (props) => {
   }
 
   function addPeer(incomingSignal, callerID, stream) {
-    console.log('add user')
     const peer = new Peer({
       initiator: false,
       trickle: false,
@@ -143,6 +152,7 @@ const Room = (props) => {
     return peer;
   }
 
+  console.log(peers)
 
   return (
     <div className="videochat-container">
@@ -159,12 +169,11 @@ const Room = (props) => {
         </div>
       </div>
       <div className="videochat-companions">
-        {peers.map(peer => {
-
-          return (
-            <Video key={peer.peerID} peer={peer.peer} />
-          );
-        })}
+          {peers.map(peer =>  {
+            return (
+              <Video key={peer.peerID} peer={peer.peer}/>
+            )
+          })}
       </div>
     </div>
   );

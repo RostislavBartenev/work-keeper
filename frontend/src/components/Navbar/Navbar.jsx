@@ -95,9 +95,6 @@ export default function MiniDrawer({children}) {
 
   const aboutMe = useSelector(state => state.aboutMe)
   const { userID, name, surname } = useSelector(state => state.user)
-  console.log(name, surname);
-
-  console.log(aboutMe);
   const dispatch = useDispatch()
 
 
