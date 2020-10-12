@@ -34,6 +34,15 @@ const depReducer = (state = {}, action) => {
         })
       }
 
+    case ACTION_TYPES.MAIN_DEPARTMENTS:
+
+      return {
+        ...state,
+        [action.payload.orgID]: [
+          ...action.payload.departments
+        ]
+      }
+
 
     default:
       return state

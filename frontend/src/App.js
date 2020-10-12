@@ -16,6 +16,7 @@ import MainPage from './components/MainPage'
 import OrganizationInfo from './components/OrganizationInfo';
 import DepartmentInfo from "./components/DepartmentInfo";
 import WorkerInfo from './components/WorkerInfo'
+import IsCreatorContext from './components/contexts/isCreatorContext'
 
 function App() {
 
@@ -25,56 +26,60 @@ function App() {
 
 
 
-  console.log(user);
+  console.log(aboutMe.isCreator, 'ISCREATOR');
 
   return (
     <div className="App">
 
+      <IsCreatorContext.Provider value={aboutMe.isCreator}>
 
-      <LeftMenu >
+        <LeftMenu >
 
-        <Switch>
-
-
-          <Route exact path="/user/registration">
-            <RegistrationPage />
-          </Route>
-
-          <Route exact path="/user/login">
-            <LoginPage />
-          </Route>
+          <Switch>
 
 
-          <Route exact path="/organization/:id">
-            <OrganizationInfo organizations={organizations} />
-          </Route>
+            <Route exact path="/user/registration">
+              <RegistrationPage />
+            </Route>
 
-          <Route exact path="/worker/:id">
-            <WorkerInfo organizations={organizations} />
-          </Route>
-
-          <Route exact path="/department/:id">
-            <DepartmentInfo organizations={organizations} />
-          </Route>
+            <Route exact path="/user/login">
+              <LoginPage />
+            </Route>
 
 
-          <Route exact path='/videochat' component={Room} />
+            <Route exact path="/organization/:id">
+              <OrganizationInfo organizations={organizations} />
+            </Route>
+
+            <Route exact path="/worker/:id">
+              <WorkerInfo organizations={organizations} />
+            </Route>
+
+            <Route exact path="/department/:id">
+              <DepartmentInfo organizations={organizations} />
+            </Route>
 
 
-          <PrivateRoute exact path={`/profile/:id`}>
-            <Profile />
-          </PrivateRoute>
+            <Route exact path='/videochat' component={Room} />
 
-          <Route exact path="/">
-            {aboutMe.isMe ? <MainPage /> : <Redirect to="/user/registration" />}
-          </Route>
 
-          <Route exact path='/global-chat'>
-            <SignIn />
-          </Route>
+            <PrivateRoute exact path={`/profile/:id`}>
+              <Profile />
+            </PrivateRoute>
 
-        </Switch>
-      </LeftMenu>
+            <Route exact path="/">
+              {aboutMe.isMe ? <MainPage /> : <Redirect to="/user/registration" />}
+            </Route>
+
+            <Route exact path='/global-chat'>
+              <SignIn />
+            </Route>
+
+          </Switch>
+        </LeftMenu>
+
+
+      </IsCreatorContext.Provider>
     </div>
   );
 }

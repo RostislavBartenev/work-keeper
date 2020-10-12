@@ -2,8 +2,7 @@ const initialState = () => {
   const initialValue = {
     aboutMe: {},
 
-    user: {
-    },
+    user: {},
 
     organizations: [],
 
