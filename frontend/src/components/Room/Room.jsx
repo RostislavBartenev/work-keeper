@@ -84,7 +84,7 @@ const Room = (props) => {
           console.log(peerObj.peer._id, 'peer id')
 
 
-          setPeers(users => users.map(el => el.peer._id !== peerObj.peer._id ? {...el} : {...peerObj} ));
+          setPeers(users => users.map(el => el.peerID !== peerObj.peerID ? {...el} : {...peerObj} ));
           // setPeers(users => [...users, peerObj]);
 
         });
