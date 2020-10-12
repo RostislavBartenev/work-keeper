@@ -3,25 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1f5aebc6-d0f3-47e5-ab81-b59a114de332" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/asset-manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/precache-manifest.0ba52b05ec61450161663d11f3552e25.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/precache-manifest.eca17b05b3ed42eefded15e5629c0bd3.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/service-worker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/css/main.9cb37e66.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/css/main.9cb37e66.chunk.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/2.f0082ff1.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/2.f0082ff1.chunk.js.LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/2.f0082ff1.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/main.a593f088.chunk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/main.a593f088.chunk.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/runtime-main.851de3a6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/public/static/js/runtime-main.851de3a6.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Chat/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Chat/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignIn/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignIn/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SignIn/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SignIn/index.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,13 +38,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/public" />
       <recent name="$PROJECT_DIR$/backend/src/routes" />
       <recent name="$PROJECT_DIR$/backend" />
       <recent name="$PROJECT_DIR$/public" />
-      <recent name="$PROJECT_DIR$" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -89,7 +75,8 @@
       <workItem from="1602410803819" duration="11581000" />
       <workItem from="1602423981076" duration="1021000" />
       <workItem from="1602481316193" duration="671000" />
-      <workItem from="1602484441722" duration="4504000" />
+      <workItem from="1602484441722" duration="5114000" />
+      <workItem from="1602500362264" duration="1867000" />
     </task>
     <servers />
   </component>
