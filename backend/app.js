@@ -130,6 +130,10 @@ io.on('connection', socket => {
 
 });
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'))
+})
+
 server.listen(app.locals.settings.port, () => {
   console.log('Server started on port ' + app.locals.settings.port);
 })
