@@ -1,7 +1,16 @@
-.MuiAppBar-colorPrimary {
-  background-color: white !important;
+a {
+  text-decoration: none;
 }
 
 .MuiListItem-gutters {
-  padding-left: 25px !important;
+  padding-left: 20px !important;
+}
+
+.MuiPaper-root {
+  background-color: #25274D !important;
+}
+
+
+.makeStyles-toolbar-9 {
+  vertical-align: middle;
 }

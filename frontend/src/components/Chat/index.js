@@ -39,7 +39,7 @@ function Chat({ users, messages, userName, roomId, onAddMessage, socketRef, user
                     {messages.map((message, index) => (
                       message.userName === userInfo ?
                         <div key={index} style={{textAlign: "right"}} className="message">
-                        <p style={{backgroundColor: 'blue', color: 'white'}}>{message.text}</p>
+                        <p style={{backgroundColor: '#29648A'}}>{message.text}</p>
                         <div>
                           <span>{message.userName}</span>
                         </div>
