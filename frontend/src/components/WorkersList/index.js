@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 import WorkerInfo from '../WorkerInfo';
 
 
-const WorkersList = ({ workersArr = [], mesFromBack }) => {
+const WorkersList = ({ workersArr = [] }) => {
 
   console.log('WorkersList_workersArr', workersArr);
   return (
     <>
-      <div>Salam WorkersList</div>
+      <br />
       <hr />
       {workersArr.length
         ?
@@ -25,11 +25,8 @@ const WorkersList = ({ workersArr = [], mesFromBack }) => {
           })}
         </ul>
         :
-        <>
-          <p>Нет добавленных сотрудников</p>
-          {mesFromBack &&
-            <p style={{ color: "red", fontSize: "small" }}>{mesFromBack}</p>}
-        </>
+        <p>Нет добавленных сотрудников</p>
+
       }
 
     </>

@@ -46,8 +46,9 @@ export default function ModalWorker({ handleClose, _id: depID, open, orgID, setA
         dispatch(ACTION_DEP.WORKER_TO_DEP(orgID, depID, result));
         // dispatch(ACTION_ORG.DEP_TO_ORG(depID, result._id));
 
-        setAddWorker(result)
+        return setAddWorker(result)
       }
+      return setMesFromBack(result.message)
 
 
     } catch (err) {

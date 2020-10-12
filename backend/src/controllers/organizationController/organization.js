@@ -3,23 +3,60 @@ const User = require('../../models/HASAN.user.model')
 
 const errorHandler = require('../../helpers/errorHandler')
 
+
+const serializeUser = (user, isCreator) => ({
+  organization: user.organization,
+  departments: user.departments,
+  _id: user._id,
+  name: user.name,
+  surname: user.surname,
+  email: user.email,
+  accessToken: user.accessToken,
+  refreshToken: user.refreshToken,
+  __v: user.__v,
+  isCreator: isCreator
+
+})
+
 // ПОЛУЧАЕМ ОРГАНИЗАЦИЮ по userID
 module.exports.getAllInfo = async function (req, res) {
   const { userID } = req.query
 
   try {
-    // const org = await Organization.find({ creator: userID }).populate({ path: 'Department' })
-    /*
-     MAIN PAGE
-    User populate organizations departments
-  
-    res  USer,
-  
-    одинаковые EMAIL-ы
-    */
-    console.log(org);
 
-    res.status(200).json(org)
+    const thisUser = await User.findOne({ _id: userID })
+
+    console.log(thisUser.organization == true, 'CHECK');
+    let isCreator;
+
+    // ЕСЛИ СОЗДАТЕЛЬ компании
+    if (thisUser.organization.length) {
+      isCreator = true;
+
+      thisUser
+        .populate({
+          path: 'organization',
+          populate: { path: 'departments' }
+        })
+        .execPopulate();
+
+      const userToSand = serializeUser(thisUser, isCreator)
+      console.log(userToSand, '<<<<<<<CREATORUser');
+
+      return res.status(200).json(userToSand) // объект плюс isCreator: true/false
+    }
+
+    // если НЕ СОЗДАТЕЛЬ компании
+    isCreator = false;
+    thisUser
+      .populate('departments')
+      .execPopulate();
+
+    const userToSand = serializeUser(thisUser, isCreator)
+    console.log(userToSand, '<<<<<<<WORKERUser');
+
+    return res.status(200).json(userToSand) // объект плюс isCreator: true/false
+
   } catch (e) {
     errorHandler(res, e)
   }

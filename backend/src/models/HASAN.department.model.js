@@ -6,6 +6,7 @@ const departmentSchema = new mongoose.Schema({
     type: String,
     require: true
   },
+  organization: { type: mongoose.Schema.Types.ObjectId, ref: 'Organization' },
   head: [],
   workers: [],
   videoConf: String,

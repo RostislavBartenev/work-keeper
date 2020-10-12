@@ -42,13 +42,6 @@ const DepartmentInfo = ({ organizations }) => {
     };
   }, [addWorker])
 
-  // useEffect(() => {
-  //   console.log(dep, 'DEPPPPPPPPPPPPPPPPP');
-
-  // }, [dep, setDep])
-
-
-
   const backHandler = () => {
     history.goBack()
   }
@@ -73,12 +66,14 @@ const DepartmentInfo = ({ organizations }) => {
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
             + Добавить сотрудника
           </Button>
+          {mesFromBack &&
+            <span style={{ color: "red", fontSize: "small" }}>{' ' + mesFromBack}</span>}
+
           {open && <ModalWorker open={open} handleClose={handleClose} {...dep} orgID={orgID} setAddWorker={setAddWorker} setMesFromBack={setMesFromBack} />}
 
           <div>
             <WorkersList workersArr={workersArr} mesFromBack={mesFromBack} />
           </div>
-
 
           <button onClick={backHandler} type="button" className="btn btn-primary mt-5">Back</button>
 
