@@ -95,9 +95,6 @@ export default function MiniDrawer({children}) {
 
   const aboutMe = useSelector(state => state.aboutMe)
   const { userID, name, surname } = useSelector(state => state.user)
-  console.log(name, surname);
-
-  console.log(aboutMe);
   const dispatch = useDispatch()
 
 
@@ -162,80 +159,85 @@ export default function MiniDrawer({children}) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <Link to={'/'} className="nav-link">
-            <ListItem button>
-              <ListItemIcon><HomeIcon /></ListItemIcon>
-              <ListItemText>
-                Главная
-              </ListItemText>
-            </ListItem>
-          </Link>
-          {aboutMe.isMe ?
-            <>
-              <Link to="/videochat" className="nav-link">
-                <ListItem button>
-                  <ListItemIcon><VideocamIcon /></ListItemIcon>
-                  <ListItemText>
-                    Видео
-                  </ListItemText>
-                </ListItem>
-              </Link>
-              <Link to="/global-chat" className="nav-link">
-                <ListItem button>
-                  <ListItemIcon><ChatIcon /></ListItemIcon>
-                  <ListItemText>
-                    Чат
-                  </ListItemText>
-                </ListItem>
-              </Link>
-            </>
-            : ''}
-
-        </List>
-        <Divider />
-        <List>
-          {aboutMe.isMe ?
-            <>
-              <Link to={`/profile/${userID}`} className="nav-link">
-                <ListItem button>
-                  <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-                  <ListItemText>
-                    Личный кабинет
-                  </ListItemText>
-                </ListItem>
-              </Link>
-              <Link to="/user/registration" className="nav-link" onClick={handleQuit}>
-                <ListItem button>
-                  <ListItemIcon><MeetingRoomIcon /></ListItemIcon>
-                  <ListItemText>
-                    Выйти
-                  </ListItemText>
-                </ListItem>
-              </Link>
-            </> :
-            <>
-            <Link className="nav-link" to="/user/registration">
+        <div className="menu-items">
+          <List>
+            <Link to={'/'} className="nav-link">
               <ListItem button>
-                <ListItemIcon>< VpnKeyIcon /></ListItemIcon>
+                <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText>
-                  Регистрация
+                  Главная
                 </ListItemText>
               </ListItem>
             </Link>
-            <Link className="nav-link" to="/user/login">
-            <ListItem button>
-            <ListItemIcon><LockIcon /></ListItemIcon>
-            <ListItemText>
-            Войти
-            </ListItemText>
-            </ListItem>
-            </Link>
-            </>
-          }
+            {aboutMe.isMe ?
+              <>
+                <Link to="/videochat" className="nav-link">
+                  <ListItem button>
+                    <ListItemIcon><VideocamIcon /></ListItemIcon>
+                    <ListItemText>
+                      Видео
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+                <Link to="/global-chat" className="nav-link">
+                  <ListItem button>
+                    <ListItemIcon><ChatIcon /></ListItemIcon>
+                    <ListItemText>
+                      Чат
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+              </>
+              : ''}
+
+          </List>
+
+          <Divider />
+          <List>
+            {aboutMe.isMe ?
+              <>
+                <Link to={`/profile/${userID}`} className="nav-link">
+                  <ListItem button>
+                    <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                    <ListItemText>
+                      Личный кабинет
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+                <Link to="/user/registration" className="nav-link" onClick={handleQuit}>
+                  <ListItem button>
+                    <ListItemIcon><MeetingRoomIcon /></ListItemIcon>
+                    <ListItemText>
+                      Выйти
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+              </> :
+              <>
+                <Link className="nav-link" to="/user/registration">
+                  <ListItem button>
+                    <ListItemIcon>< VpnKeyIcon /></ListItemIcon>
+                    <ListItemText>
+                      Регистрация
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+                <Link className="nav-link" to="/user/login">
+                  <ListItem button>
+                    <ListItemIcon><LockIcon /></ListItemIcon>
+                    <ListItemText>
+                      Войти
+                    </ListItemText>
+                  </ListItem>
+                </Link>
+              </>
+            }
 
 
-        </List>
+          </List>
+        </div>
+
+
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

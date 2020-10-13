@@ -1,12 +1,19 @@
 const express = require('express');
-const http = require('http')
+const http = require('http');
+const https = require('https');
 const app = express();
-const server = http.createServer(app);
 const socket = require("socket.io");
-const io = socket(server);
 const cors = require('cors');
+const fs = require('fs');
 
+const options = {
+  cert: fs.readFileSync('../../../certs/workkeeper/fullchain.pem'),
+  key: fs.readFileSync('../../../certs/workkeeper/privkey.pem')
+};
 
+const server = https.createServer(options, app);
+
+const io = socket(server);
 const dbConnect = require('./src/dbConnect');
 const userRouter = require('./src/routes/userRouter');
 const orgRouter = require('./src/routes/organizationRouter');
@@ -20,7 +27,7 @@ require('dotenv').config();
 const path = require('path');
 
 
-app.set('port', process.env.PORT || 3006);
+app.set('port', process.env.NODE_ENV === 'production' ? process.env.PORT || 443 : process.env.PORT || 8080);
 
 app.use(cors());
 app.use(express.json());
@@ -126,10 +133,15 @@ io.on('connection', socket => {
       room = room.filter(id => id !== socket.id)
       users[roomID] = room
     }
+
     socket.broadcast.emit('user left', socket.id)
   })
 
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'))
+})
 
 server.listen(app.locals.settings.port, () => {
   console.log('Server started on port ' + app.locals.settings.port);
