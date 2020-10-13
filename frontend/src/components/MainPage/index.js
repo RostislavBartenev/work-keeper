@@ -10,7 +10,7 @@ const MainPage = () => {
   const { userID } = useSelector(state => state.user)
   const { isCreator } = useContext(isCreatorContext)
 
-  const [dep, setDep] = useState({})
+  const [dep, setDep] = useState([])
   const [orgName, setOrgName] = useState('')
   const [userInfo, setUserInfo] = useState({})
 

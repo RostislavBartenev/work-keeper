@@ -1,6 +1,9 @@
 const initialState = () => {
   const initialValue = {
-    aboutMe: {},
+    aboutMe: {
+      isMe: false,
+      isCreator: false
+    },
 
     user: {},
 
