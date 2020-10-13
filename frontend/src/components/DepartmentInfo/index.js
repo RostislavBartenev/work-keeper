@@ -15,14 +15,19 @@ const DepartmentInfo = ({ organizations }) => {
   const dispatch = useDispatch()
 
   const [dep, setDep] = useState({})
+
+  const [addWorker, setAddWorker] = useState({})
+
   const [orgID, setOrgID] = useState('')
   const history = useHistory()
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [mesFromBack, setMesFromBack] = useState('');
+
 
   const departments = useSelector(state => state.departments)
 
-  const workersArr = useSelector(state => state.department.workers) || []
-  // console.log('workersArr', workersArr);
+  const workersArr = useSelector(state => state.department.workers)
+  console.log('workersArr', workersArr);
 
 
 
@@ -30,17 +35,12 @@ const DepartmentInfo = ({ organizations }) => {
 
     const { _id: orgID } = organizations.find(el => el.departments.find(element => element === id));
     if (orgID) {
-      setDep(departments[orgID].find(el => el._id = id));
+      const foundDep = departments[orgID].find(el => el._id = id)
+      setDep(foundDep);
       setOrgID(orgID)
+      dispatch(ACTION_DEP_ACTUAL.DEP_ACTUAL(foundDep));
     };
-  }, [])
-
-  useEffect(() => {
-    dispatch(ACTION_DEP_ACTUAL.DEP_ACTUAL(dep));
-
-  }, [dep])
-
-
+  }, [addWorker])
 
   const backHandler = () => {
     history.goBack()
@@ -66,12 +66,14 @@ const DepartmentInfo = ({ organizations }) => {
           <Button variant="outlined" color="primary" onClick={handleClickOpen}>
             + Добавить сотрудника
           </Button>
-          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} orgID={orgID} />}
+          {mesFromBack &&
+            <span style={{ color: "red", fontSize: "small" }}>{' ' + mesFromBack}</span>}
+
+          {open && <ModalWorker open={open} handleClose={handleClose} {...dep} orgID={orgID} setAddWorker={setAddWorker} setMesFromBack={setMesFromBack} />}
 
           <div>
-            <WorkersList workersArr={workersArr} />
+            <WorkersList workersArr={workersArr} mesFromBack={mesFromBack} />
           </div>
-
 
           <button onClick={backHandler} type="button" className="btn btn-primary mt-5">Back</button>
 

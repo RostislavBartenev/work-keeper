@@ -19,6 +19,29 @@ const depReducer = (state = {}, action) => {
       }
 
 
+    case ACTION_TYPES.WORKER_TO_DEP:
+
+      return {
+        ...state,
+        [action.payload.orgID]: state[action.payload.orgID].map((dep) => {
+          if (dep._id === action.payload.depID) return {
+            ...dep,
+            workers: [
+              ...dep.workers, action.payload.workerObj
+            ]
+          }
+          return dep;
+        })
+      }
+
+    case ACTION_TYPES.MAIN_DEPARTMENTS:
+
+      return {
+        ...state,
+        [action.payload.orgID]: [
+          ...action.payload.departments
+        ]
+      }
 
 
     default:

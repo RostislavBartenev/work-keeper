@@ -29,6 +29,7 @@ module.exports.create = async function (req, res) {
     const newDepart = new Department({
       creator: userID,
       name: nameDepart,
+      organization: orgID,
       videoConf: short.generate(),
       chat: short.generate()
     });
@@ -69,23 +70,48 @@ module.exports.delete = async function (req, res) {
 // ОБНОВЛЯЕМ ДЕПАРТМЕНТ
 module.exports.update = async function (req, res) {
   const { id: depID } = req.params
-  const { workerEmail } = req.body
-  console.log(workerEmail);
-  console.log(depID);
+  let { workerEmail } = req.body
+
+  workerEmail = workerEmail.toLowerCase()
+
 
   try {
-    const updateUser = await User.findOneAndUpdate(
-      { email: workerEmail },
-      { $push: { departments: depID } },
-      { new: true }
-    );
+
+    const updateUser = await User.findOne({ email: workerEmail }, 'departments')
+    const isPresent = updateUser.departments.find(dep => dep === depID)    // const updateUser = await User.findOneAndUpdate(
+    console.log(isPresent);
+
+    if (isPresent !== undefined) {
+      updateUser.departments.push(depID);
+      await updateUser.save();
+
+      const dataToFront = {
+        email: workerEmail,
+        name: updateUser.name,
+        surname: updateUser.surname,
+        _id: updateUser._id
+      }
+
+      await Department.findOneAndUpdate(
+        { _id: depID },
+        {
+          $push: {
+            workers: dataToFront
+          }
+        }
+      );
+      return res.status(200).json(dataToFront)
+    }
+
+    return res.status(500).json({ message: 'Данный работник уже есть в системе!' })
+
+    // const updateUser = await User.findOneAndUpdate(
+    //   { email: workerEmail },
+    //   { $push: { departments: depID } },
+    //   { new: true }
+    // );
 
 
-    await Department.findOneAndUpdate(
-      { _id: depID },
-      { $push: { workers: workerEmail } }
-    );
-    res.status(200).json(updateUser)
   } catch (e) {
     errorHandler(res, e)
   }

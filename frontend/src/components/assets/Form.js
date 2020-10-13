@@ -93,7 +93,6 @@ const Form = ({ title, isReg }) => {
 
   async function registration(event) {
     event.preventDefault();
-    console.log(inputs);
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/registration`, {
         method: 'POST',

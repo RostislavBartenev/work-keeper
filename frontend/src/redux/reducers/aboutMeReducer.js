@@ -15,6 +15,11 @@ const aboutMeReducer = (state = {}, action) => {
         isMe: false,
       }
 
+    case ACTION_TYPES.MAIN_IS_CREATOR:
+      return {
+        ...state,
+        isCreator: action.payload.isCreator
+      }
 
     default:
       return state
