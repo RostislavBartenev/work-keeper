@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1f5aebc6-d0f3-47e5-ab81-b59a114de332" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Room/Room.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +83,8 @@
       <workItem from="1602824742491" duration="118000" />
       <workItem from="1602829064737" duration="1128000" />
       <workItem from="1603103591350" duration="158000" />
+      <workItem from="1603104148188" duration="357000" />
+      <workItem from="1603105209083" duration="303000" />
     </task>
     <servers />
   </component>
