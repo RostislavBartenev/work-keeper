@@ -3,6 +3,7 @@ const User = require('../../models/HASAN.user.model')
 
 const errorHandler = require('../../helpers/errorHandler')
 
+
 const serializeUser = (user) => ({
   organization: user.organization,
   departments: user.departments,
@@ -13,7 +14,6 @@ const serializeUser = (user) => ({
   accessToken: user.accessToken,
   refreshToken: user.refreshToken,
   __v: user.__v,
-
 })
 
 module.exports.getAllInfo = async function (req, res) {
@@ -22,6 +22,7 @@ module.exports.getAllInfo = async function (req, res) {
   try {
 
     const thisUser = await User.findOne({ _id: userID })
+
       .populate('organization')
       .populate({
         path: 'departments',

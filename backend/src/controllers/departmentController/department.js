@@ -59,7 +59,7 @@ module.exports.delete = async function (req, res) {
 
 }
 
-// ОБНОВЛЯЕМ ДЕПАРТМЕНТ
+
 module.exports.update = async function (req, res) {
   const { id: depID } = req.params
   let { workerEmail } = req.body
@@ -99,6 +99,7 @@ module.exports.update = async function (req, res) {
     }
 
     return res.status(500).json({ message: 'Данный работник уже есть в системе!' })
+
 
   } catch (e) {
     errorHandler(res, e)

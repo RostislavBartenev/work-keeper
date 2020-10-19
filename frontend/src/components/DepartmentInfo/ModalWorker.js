@@ -19,10 +19,12 @@ export default function ModalWorker({ handleClose, _id: depID, open, orgID, setA
   const addWorker = async () => {
     handleClose();
     try {
+
       if (input.trim()) {
         const data = {
           workerEmail: input.trim(),
         }
+
 
         const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department/${depID}`, {
           method: 'PATCH',
@@ -30,6 +32,7 @@ export default function ModalWorker({ handleClose, _id: depID, open, orgID, setA
           body: JSON.stringify(data),
         })
         const result = await response.json();
+
 
         if (response.ok) {
           dispatch(ACTION_DEP.WORKER_TO_DEP(orgID, depID, result));

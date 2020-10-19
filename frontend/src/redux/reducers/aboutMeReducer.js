@@ -19,6 +19,7 @@ const aboutMeReducer = (state = {}, action) => {
     case ACTION_TYPES.MAIN_IS_CREATOR:
       return {
         ...state,
+
         isCreator: true,
       }
 

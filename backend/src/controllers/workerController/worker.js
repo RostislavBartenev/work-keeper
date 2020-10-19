@@ -3,6 +3,7 @@ const Department = require('../../models/HASAN.department.model');
 const User = require('../../models/HASAN.user.model')
 const short = require('short-uuid');
 
+
 const errorHandler = require('../../helpers/errorHandler')
 
 module.exports.getAllInfo = async function (req, res) {
@@ -44,7 +45,7 @@ module.exports.create = async function (req, res) {
 
 }
 
-// УДАЛЯЕМ WORKER
+
 module.exports.delete = async function (req, res) {
   try {
     await Organization.remove({ _id: req.params.id })
@@ -57,6 +58,7 @@ module.exports.delete = async function (req, res) {
   }
 
 }
+
 
 module.exports.update = function (req, res) {
   try {

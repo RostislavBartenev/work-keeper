@@ -5,6 +5,7 @@ const actualDepReducer = (state = {}, action) => {
   switch (action.type) {
     case ACTION_TYPES.DEP_ACTUAL:
       return {
+
         ...state,
         ...action.payload
       }

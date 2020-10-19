@@ -50,10 +50,14 @@ const DepartmentInfo = () => {
   const organizations = useSelector(state => state.organizations)
 
 
+import WorkersList from '../WorkersList';
+
+
   const { id } = useParams()
   const dispatch = useDispatch()
 
   const [dep, setDep] = useState({})
+
 
   const [addWorker, setAddWorker] = useState({})
 
@@ -75,6 +79,7 @@ const DepartmentInfo = () => {
       setOrgID(orgID)
       dispatch(ACTION_DEP_ACTUAL.DEP_ACTUAL(foundDep));
     }
+
   }, [addWorker])
 
   const backHandler = () => {
@@ -126,6 +131,7 @@ const DepartmentInfo = () => {
           </div>
 
           </>
+
         : null}
       <Button className="btn" variant="contained" onClick={backHandler} color="primary">Назад</Button>
     </div>

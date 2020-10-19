@@ -17,9 +17,7 @@ import OrganizationInfo from './components/OrganizationInfo';
 import DepartmentInfo from "./components/DepartmentInfo";
 import WorkerInfo from './components/WorkerInfo'
 import * as ACTION_MAIN from "./redux/actions/mainPageActions";
-
 import * as ACTIONS_LOAD from './redux/actions/loaders/loaders'
-
 
 function App() {
 
@@ -82,8 +80,11 @@ function App() {
     })();
   }, [loggedIn])
 
+  console.log(aboutMe.isCreator, 'ISCREATOR');
+
   return (
     <div className="App">
+
 
       <LeftMenu setLoggedIn={setLoggedIn}>
 
@@ -111,11 +112,16 @@ function App() {
             <DepartmentInfo />
           </Route>
 
+            <Route exact path='/videochat' component={Room} />
 
           <Route exact path='/videochat' component={Room} />
 
+
           <Route exact path='/global-chat' component={SignIn} />
 
+            <Route exact path="/">
+              {aboutMe.isMe ? <MainPage /> : <Redirect to="/user/registration" />}
+            </Route>
 
           <PrivateRoute exact path={`/profile/:id`}>
             <Profile />

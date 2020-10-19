@@ -25,6 +25,7 @@ const useStyles = makeStyles({
 
 const WorkersList = ({ workersArr = [] }) => {
 
+
   const classes = useStyles();
 
   return (
@@ -55,6 +56,7 @@ const WorkersList = ({ workersArr = [] }) => {
             )
           })}
         </> : null
+
       }
 
     </>

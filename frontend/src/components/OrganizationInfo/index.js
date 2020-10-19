@@ -80,6 +80,7 @@ const OrganizationInfo = ({ }) => {
 
   return (
     <>
+
       {
         isCreator ?
           <div className="org-container">
@@ -140,6 +141,7 @@ const OrganizationInfo = ({ }) => {
 
               </>
               : null}
+
           </div>
           : 'Вы как сюда попали?'
       }

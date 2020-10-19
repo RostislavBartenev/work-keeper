@@ -1,6 +1,7 @@
 import * as ACTIONS_TYPES from './actionTypes'
 
 
+
 const MAIN_USER = (userInfo) => {
   return {
     type: ACTIONS_TYPES.MAIN_USER,
@@ -23,6 +24,7 @@ const MAIN_IS_NOT_CREATOR = () => {
 };
 
 
+
 const MAIN_DEPARTMENTS = (orgID, departments) => {
   return {
     type: ACTIONS_TYPES.MAIN_DEPARTMENTS,
@@ -32,7 +34,8 @@ const MAIN_DEPARTMENTS = (orgID, departments) => {
   }
 };
 
-// organization - ЭТО МАССИВ ОБЪЕКТОВ
+
+
 const MAIN_CREATOR_DEPARTMENTS = (organization) => {
   return {
     type: ACTIONS_TYPES.MAIN_CREATOR_DEPARTMENTS,
@@ -47,11 +50,13 @@ const MAIN_CREATOR_DEPARTMENTS = (organization) => {
 const MAIN_CREATOR_ORGANIZATIONS = (organization) => {
   return {
     type: ACTIONS_TYPES.MAIN_CREATOR_ORGANIZATIONS,
+
     payload: {
       organization
     }
   }
 };
+
 
 const MAIN_ORGANIZATIONS = (orgObj) => {
   return {
@@ -72,6 +77,7 @@ const BACK_WORKER_DEPS = (depArr) => {
 
 
 export {
+
   MAIN_USER,
   MAIN_DEPARTMENTS,
   MAIN_ORGANIZATIONS,
@@ -80,4 +86,5 @@ export {
   MAIN_IS_CREATOR,
   MAIN_IS_NOT_CREATOR,
   BACK_WORKER_DEPS,
+
 } 

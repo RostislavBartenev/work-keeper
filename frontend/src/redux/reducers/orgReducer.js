@@ -21,6 +21,7 @@ const orgReducer = (state = [], action) => {
         return el;
       })
 
+
     case ACTION_TYPES.MAIN_ORGANIZATIONS:
       return [
         action.payload,
@@ -31,6 +32,7 @@ const orgReducer = (state = [], action) => {
       return [
         ...action.payload.organization,
       ]
+
 
     default:
       return state
