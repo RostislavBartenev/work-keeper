@@ -2,10 +2,10 @@ import React from 'react'
 import Form from '../assets/Form'
 
 
-function LoginPage() {
+function LoginPage({ setLoggedIn }) {
 
   return (
-    <Form title={'Войти'} />
+    <Form title={'Войти'} setLoggedIn={setLoggedIn} />
   );
 }
 

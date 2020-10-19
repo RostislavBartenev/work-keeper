@@ -1,0 +1,10 @@
+DB_HOST=localhost
+DB_NAME=WorkKeeper
+DB_PORT=27017
+saltRounds=10
+jwtToken=qwertyuiop
+jwtRefreshToken=asdfghjkl
+tokenLife=300s
+refreshTokenLife=300d
+HTTP_PORT=80
+PORT=443

@@ -5,15 +5,14 @@ import './index.css'
 
 import reducer from './reducer';
 import Chat from '../Chat';
-import io from "socket.io-client";
 import {useSelector} from "react-redux";
+import io from "socket.io-client";
+
 
 function App() {
 
     const {name, surname} = useSelector(state => state.user)
-
-    const chat = '123'
-    console.log(chat)
+    const chat = useSelector(state => state.department.chat)
 
     const socketRef = useRef();
 
@@ -25,37 +24,44 @@ function App() {
         messages: [],
     });
 
-    let obj = {roomId: chat, userName: name + ' ' + surname}
+
 
     useEffect(  () => {
 
-        socketRef.current = io.connect("/");
+        socketRef.current = io(process.env.REACT_APP_SERVER_URL);
 
         (async () => {
-            await axios.post('/rooms', obj);
+            let obj = {roomId: chat, userName: name + ' ' + surname}
+
+
+            socketRef.current.emit('ROOM:JOIN', obj);
+
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/rooms`, obj);
 
             dispatch({
                 type: 'JOINED',
                 payload: obj,
             });
 
-            console.log('room join')
-            socketRef.current.emit('ROOM:JOIN', obj);
-            const { data } = await axios.get(`/rooms/${obj.roomId}`);
+
+            const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/rooms/${obj.roomId}`);
             dispatch({
                 type: 'SET_DATA',
                 payload: data,
             });
+
         })()
 
-
         return () => {
-            console.log('disc')
             socketRef.current.disconnect()
         }
 
     }, [])
 
+    useEffect(() => {
+        socketRef.current.on('ROOM:SET_USERS', setUsers);
+        socketRef.current.on('ROOM:NEW_MESSAGE', addMessage);
+    }, [])
 
     const setUsers = (users) => {
         dispatch({
@@ -71,13 +77,8 @@ function App() {
         });
     };
 
-    useEffect(() => {
-        socketRef.current.on('ROOM:SET_USERS', setUsers);
-        socketRef.current.on('ROOM:NEW_MESSAGE', addMessage);
-    }, []);
-
     return (
-      <Chat userInfo={name + ' ' + surname} {...state} socketRef={socketRef} onAddMessage={addMessage} />
+      <Chat userInfo={name + ' ' + surname} socketRef={socketRef} {...state} onAddMessage={addMessage} />
     );
 }
 

@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as ACTION_TASKS from "../../redux/actions/regAndLog";
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Form = ({ title, isReg }) => {
+const Form = ({ title, isReg, setLoggedIn }) => {
   const classes = useStyles();
   const history = useHistory()
 
@@ -55,7 +55,6 @@ const Form = ({ title, isReg }) => {
 
   async function login(event) {
     event.preventDefault();
-    console.log(inputs);
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/login`, {
         method: 'POST',
@@ -63,10 +62,6 @@ const Form = ({ title, isReg }) => {
         body: JSON.stringify(inputs),
       })
       const result = await response.json();
-
-      //////
-      console.log('LOGIN', result);
-      //////
 
       if (response.ok) {
         dispatch(ACTION_TASKS.LOGIN(result));
@@ -77,10 +72,10 @@ const Form = ({ title, isReg }) => {
           password: ''
         });
 
+        setLoggedIn(true)
         history.push('/')
 
       } else {
-        // console.log(result.message);
         setMessage(result.message);
       }
 
@@ -93,7 +88,6 @@ const Form = ({ title, isReg }) => {
 
   async function registration(event) {
     event.preventDefault();
-    console.log(inputs);
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/registration`, {
         method: 'POST',
@@ -101,11 +95,6 @@ const Form = ({ title, isReg }) => {
         body: JSON.stringify(inputs),
       })
       const result = await response.json();
-
-      //////
-      console.log('REGISTRATION', result);
-      //////
-
 
       if (response.ok) {
         dispatch(ACTION_TASKS.REGISTRATION(result));
@@ -117,12 +106,12 @@ const Form = ({ title, isReg }) => {
           password: ''
         });
 
+        setLoggedIn(true)
         history.push('/')
 
       } else {
         setMessage(result.message);
       }
-
 
     } catch (err) {
       console.log(err);
@@ -147,7 +136,6 @@ const Form = ({ title, isReg }) => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="name"
                 label="Имя"
@@ -160,7 +148,6 @@ const Form = ({ title, isReg }) => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="surname"
                 label="Фамилия"
@@ -174,7 +161,6 @@ const Form = ({ title, isReg }) => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email"
@@ -188,7 +174,6 @@ const Form = ({ title, isReg }) => {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             label="Пароль"

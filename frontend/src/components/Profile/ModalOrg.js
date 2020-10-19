@@ -21,42 +21,32 @@ export default function ModalOrg({ open, handleClose }) {
     handleClose();
 
     const { user: { userID } } = JSON.parse(localStorage.getItem('redux'));
-    console.log(userID);
 
     try {
-      const data = {
-        nameOrg: input,
-        userID
+      if (input.trim()) {
+
+        const data = {
+          nameOrg: input.trim(),
+          userID
+        }
+
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/organization`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+        const result = await response.json();
+
+        if (response.ok) {
+          dispatch(ACTION_ORG.ORG_ADD_ORG(result));
+          dispatch(ACTION_DEP.ORG_KEY_IN_DEP(result._id));
+        }
+
       }
-
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/organization`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      const result = await response.json();
-
-
-
-      //////
-      console.log('ПОСЛЕ ДОБАВЛЕНИЯ ОРГ', result);
-      //////
-
-
-      if (response.ok) {
-        dispatch(ACTION_ORG.ORG_ADD_ORG(result));
-        dispatch(ACTION_DEP.ORG_KEY_IN_DEP(result._id));
-      }
-
-
     } catch (err) {
       console.log(err);
     }
   }
-
-
-
-
 
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -67,7 +57,6 @@ export default function ModalOrg({ open, handleClose }) {
           </DialogContentText>
         <form>
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Название"
@@ -75,6 +64,7 @@ export default function ModalOrg({ open, handleClose }) {
             fullWidth
             onChange={(e) => setInput(e.target.value)}
             autoFocus
+          // onKeyDown={(e) => something(e)}
           />
         </form>
       </DialogContent>

@@ -3,16 +3,13 @@ const Department = require('../../models/HASAN.department.model');
 const User = require('../../models/HASAN.user.model')
 const short = require('short-uuid');
 
-
 const errorHandler = require('../../helpers/errorHandler')
 
-// ПОЛУЧАЕМ ДЕПАРТМЕНТ по userID
 module.exports.getAllInfo = async function (req, res) {
   const { userID } = req.query
 
   try {
     const org = await Organization.find({ creator: userID }).populate({ path: 'Department' })
-    console.log(org);
 
     res.status(200).json(org)
   } catch (e) {
@@ -20,20 +17,17 @@ module.exports.getAllInfo = async function (req, res) {
   }
 }
 
-// СОЗДАЕМ ДЕПАРТМЕНТ
 module.exports.create = async function (req, res) {
   try {
     const { nameDepart, userID, orgID } = req.body
-    console.log('REQBODY', req.body);
 
     const newDepart = new Department({
       creator: userID,
       name: nameDepart,
+      organization: orgID,
       videoConf: short.generate(),
       chat: short.generate()
     });
-
-    console.log(newDepart);
 
     await newDepart.save();
 
@@ -52,12 +46,11 @@ module.exports.create = async function (req, res) {
 
 }
 
-// УДАЛЯЕМ ДЕПАРТМЕНТ
 module.exports.delete = async function (req, res) {
   try {
-    await Organization.remove({ _id: req.params.id })
+    await Department.remove({ _id: req.params.id })
     res.status(200).json({
-      message: 'Организация удалена'
+      message: 'Департамент удален'
     })
 
   } catch (e) {
@@ -67,9 +60,46 @@ module.exports.delete = async function (req, res) {
 }
 
 // ОБНОВЛЯЕМ ДЕПАРТМЕНТ
-module.exports.update = function (req, res) {
+module.exports.update = async function (req, res) {
+  const { id: depID } = req.params
+  let { workerEmail } = req.body
+
+  workerEmail = workerEmail.toLowerCase()
+
   try {
-    console.log(req.params);
+
+    const updateUser = await User.findOne({ email: workerEmail })
+    if (!updateUser) {
+      return res.status(500).json({ message: 'Данного работника нет в базе системы. Попросите его зарегистрироваться.' })
+
+    }
+
+    const isPresent = updateUser.departments.find(dep => dep == depID)
+
+    if (isPresent == undefined) {
+      updateUser.departments.push(depID);
+      await updateUser.save();
+
+      const dataToFront = {
+        email: workerEmail,
+        name: updateUser.name,
+        surname: updateUser.surname,
+        _id: updateUser._id
+      }
+
+      await Department.findOneAndUpdate(
+        { _id: depID },
+        {
+          $push: {
+            workers: dataToFront
+          }
+        }
+      );
+      return res.status(200).json(dataToFront)
+    }
+
+    return res.status(500).json({ message: 'Данный работник уже есть в системе!' })
+
   } catch (e) {
     errorHandler(res, e)
   }

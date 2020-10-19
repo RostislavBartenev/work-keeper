@@ -2,25 +2,64 @@ import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom'
-import DepartmentCard from '../DepartmentCard';
 import ModalDepart from './ModalDepart';
 
-const OrganizationInfo = ({ organizations }) => {
-  console.log('RENDER OrgINFO');
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import AddIcon from '@material-ui/icons/Add';
 
-  console.log(organizations);
+import './style.scss'
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardMedia from "@material-ui/core/CardMedia";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: 250,
+    height: 250,
+    alignItems: 'center',
+    display: 'flex',
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+    marginTop: 20,
+  },
+  controls: {
+    marginTop: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  playIcon: {
+    height: 50,
+    width: 50,
+  },
+}));
+
+const OrganizationInfo = ({ }) => {
+
+  const classes = useStyles();
+
+  const isCreator = useSelector(state => state.aboutMe.isCreator)
+  const organizations = useSelector(state => state.organizations)
+
+
   const { id } = useParams()
   const [org, setOrg] = useState({})
   const history = useHistory()
   const [open, setOpen] = React.useState(false);
 
   const depArray = useSelector(state => state.departments[id]) || []
-  console.log('depArray', depArray);
 
   useEffect(() => {
 
     const findOrg = organizations.find(el => el._id === id)
-    console.log('FFFFFFFFFF', findOrg);
     if (findOrg) {
       setOrg({ ...findOrg })
     }
@@ -41,41 +80,70 @@ const OrganizationInfo = ({ organizations }) => {
 
   return (
     <>
-      <div>Страница организации</div>
-      { Object.keys(org).length ?
-        <div className="d-flex flex-column align-items-center">
-          <h1>
-            {org.name}
-          </h1>
-          <p>Добавьте отделы/подразделения вашей компании </p>
+      {
+        isCreator ?
+          <div className="org-container">
+            { Object.keys(org).length ?
+              <>
+                <h1>
+                  {org.name}
+                </h1>
+                <hr/>
+                <div className="dep-container">
+                  <Card className={classes.root}>
+                    <div className={classes.details}>
+                      <div className={classes.controls}>
+                        <IconButton onClick={handleClickOpen}  aria-label="play/pause">
+                          <AddIcon className={classes.playIcon} />
+                        </IconButton>
+                      </div>
+                      <CardContent className={classes.content}>
+                        <Typography component="h5" variant="h5">
+                          Добавить отдел
+                        </Typography>
+                      </CardContent>
+                    </div>
+                  </Card>
 
+                  {open && <ModalDepart open={open} handleClose={handleClose} orgID={org._id} />}
 
-          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-            + Добавить отдел
-          </Button>
-          {open && <ModalDepart open={open} handleClose={handleClose} orgID={org._id} />}
+                  {depArray.length ?
+                    <>
+                      {depArray.map((dep) => {
+                        return (
+                          <Link to={`/department/${dep._id}`} key={dep._id}>
+                            <Card className={classes.root}>
+                              <CardActionArea>
+                                <CardMedia
+                                  component="img"
+                                  alt="Contemplative Reptile"
+                                  height="170"
+                                  image="https://cdnb.artstation.com/p/assets/images/images/001/973/811/large/leva-tuskliy-4.jpg?1455395165"
+                                  title="Contemplative Reptile"
+                                />
+                                <CardContent>
+                                  <Typography style={{marginTop: 10}} gutterBottom variant="h6" component="h6">
+                                    {dep.name}
+                                  </Typography>
+                                </CardContent>
+                              </CardActionArea>
+                            </Card>
+                          </Link>
+                        )
+                      })}
+                    </>
+                    : null
+                  }
+                </div>
 
-          <div>
-            {depArray.length ? <ul className="org-list ">
-              {depArray.map((dep) => {
-                console.log('>>>>>>>>>>', dep);
-                return (
-                  <Link to={`/department/${dep._id}`} key={dep._id}>
-                    <li className="org-list-task">
-                      <DepartmentCard {...dep} />
-                    </li>
-                  </Link>
-                )
-              })}
-            </ul> : <p>Нет добавленных отделов</p>
-            }
+                <Button className="btn" variant="contained" onClick={backHandler} color="primary">Назад</Button>
+
+              </>
+              : null}
           </div>
+          : 'Вы как сюда попали?'
+      }
 
-
-          <button onClick={backHandler} type="button" className="btn btn-primary mt-5">Back</button>
-
-        </div>
-        : null}
 
     </>
   )

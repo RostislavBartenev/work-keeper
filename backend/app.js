@@ -1,16 +1,24 @@
 const express = require('express');
-const http = require('http')
+const https = require('https');
 const app = express();
-const server = http.createServer(app);
 const socket = require("socket.io");
-const io = socket(server);
 const cors = require('cors');
+const fs = require('fs');
+const http = express();
 
+const options = {
+  cert: fs.readFileSync('../../certs/workkeeper/fullchain.pem'),
+  key: fs.readFileSync('../../certs/workkeeper/privkey.pem')
+};
 
+const server = https.createServer(options, app);
+
+const io = socket.listen(server);
 const dbConnect = require('./src/dbConnect');
 const userRouter = require('./src/routes/userRouter');
 const orgRouter = require('./src/routes/organizationRouter');
 const departRouter = require('./src/routes/departmentRouter');
+const workerRouter = require('./src/routes/workerRouter');
 
 
 dbConnect();
@@ -19,7 +27,7 @@ require('dotenv').config();
 const path = require('path');
 
 
-app.set('port', process.env.PORT || 3006);
+app.set('port', process.env.NODE_ENV === 'production' ? process.env.PORT || 443 : process.env.PORT || 8081);
 
 app.use(cors());
 app.use(express.json());
@@ -28,15 +36,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 
-///////////HASAN BACK////////
-
 app.use('/organization', orgRouter);
 app.use('/department', departRouter);
+app.use('/worker', workerRouter);
 
-
-////////////////////////////
 
 const rooms = new Map();
+
+http.get('*', function(req, res) {
+  res.redirect('https://workkeeper.ru');
+})
 
 app.get('/rooms/:id', (req, res) => {
   const { id: roomId } = req.params;
@@ -131,10 +140,13 @@ io.on('connection', socket => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/index.html'))
+  res.sendFile('index.html', {root: path.join(__dirname, 'public')})
 })
+
+http.listen(process.env.HTTP_PORT|| 8080, (err)=> {
+  if (err) throw err;
+});
 
 server.listen(app.locals.settings.port, () => {
   console.log('Server started on port ' + app.locals.settings.port);
 })
-
