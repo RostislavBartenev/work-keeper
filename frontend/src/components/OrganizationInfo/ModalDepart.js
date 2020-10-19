@@ -21,35 +21,29 @@ export default function ModalDepart({ open, handleClose, orgID }) {
     handleClose();
 
     const { user: { userID } } = JSON.parse(localStorage.getItem('redux'));
-    console.log(userID);
 
     try {
-      const data = {
-        nameDepart: input,
-        userID,
-        orgID: orgID
+      if (input.trim()) { // проверка на пустую строчку
+        const data = {
+          nameDepart: input.trim(),
+          userID,
+          orgID: orgID
+        }
+
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        })
+        const result = await response.json();
+
+
+        if (response.ok) {
+          dispatch(ACTION_DEP.DEP_ADD_DEP(orgID, result));
+          dispatch(ACTION_ORG.DEP_TO_ORG(orgID, result));
+        }
+
       }
-
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/department`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-      const result = await response.json();
-
-
-
-      //////
-      console.log('ПОСЛЕ ДОБАВЛЕНИЯ ДЕПАРТМЕНТА', result);
-      //////
-
-
-      if (response.ok) {
-        dispatch(ACTION_DEP.DEP_ADD_DEP(orgID, result));
-        dispatch(ACTION_ORG.DEP_TO_ORG(orgID, result._id));
-      }
-
-
     } catch (err) {
       console.log(err);
     }

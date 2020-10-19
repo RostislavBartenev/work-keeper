@@ -9,6 +9,7 @@ import VideocamOutlinedIcon from '@material-ui/icons/VideocamOutlined';
 import VideocamOffOutlinedIcon from '@material-ui/icons/VideocamOffOutlined';
 
 import './room.sass'
+import {useSelector} from "react-redux";
 
 const Video = (props) => {
   const ref = useRef();
@@ -26,19 +27,19 @@ const Video = (props) => {
 }
 
 
-const Room = (props) => {
+const Room = () => {
   const [peers, setPeers] = useState([]);
   const socketRef = useRef();
   const userVideo = useRef();
   const peersRef = useRef([]);
-  const roomID = props.match.params.roomID;
+  const roomID = useSelector(state => state.department.videoConf);
   const userStream = useRef();
 
   const [videoParams, setVideoParams] = useState(true); // Для включения/выключения видео
   const [microParams, setMicroParams] = useState(false); // Для включения/выключения звука
 
   useEffect(() => {
-    socketRef.current = io.connect("/");
+    socketRef.current = io.connect(process.env.REACT_APP_SERVER_URL);
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
       .then(stream => {
         userVideo.current.srcObject = stream;
@@ -49,7 +50,7 @@ const Room = (props) => {
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", users => {
           const peers = [];
-          users.forEach(userID => {
+          for (let userID of users) {
             const peer = createPeer(userID, socketRef.current.id, stream);
             peersRef.current.push({
               peerID: userID,
@@ -59,7 +60,8 @@ const Room = (props) => {
               peerID: userID,
               peer
             });
-          })
+          }
+
           setPeers(peers);
         })
 
@@ -67,25 +69,22 @@ const Room = (props) => {
 
           const peer = addPeer(payload.signal, payload.callerID, stream);
 
-          console.log(peersRef.current)
-
           peersRef.current.push({
             peerID: payload.callerID,
             peer,
           })
 
           const peerObj = {
+            peerID: payload.callerID,
             peer,
-            peerID: payload.callerID
           }
 
-          console.log(peersRef.current, peerObj, '!!!!!!!')
 
-          console.log(peerObj.peer._id, 'peer id')
+          setPeers(users => {
+            let newUsers = users.filter(el => el.peerID !== peerObj.peerID)
+            return [...newUsers, peerObj]
+          });
 
-
-          setPeers(users => users.map(el => el.peerID !== peerObj.peerID ? {...el} : {...peerObj} ));
-          // setPeers(users => [...users, peerObj]);
 
         });
 
@@ -98,19 +97,20 @@ const Room = (props) => {
           const peerObj = peersRef.current.find(p => p.peerID === id)
           if (peerObj) {
             peerObj.peer.destroy()
+            const peers = peersRef.current.filter(p => p.peerID !== id)
+            peersRef.current = peers
+            setPeers(peers)
           }
-          const peers = peersRef.current.filter(p => p.peerID !== id)
-          peersRef.current = peers
-          setPeers(peers)
         })
 
       })
 
     return () => {
       userStream.current.getTracks().forEach(el => el.stop())
-      socketRef.current.close()
+      socketRef.current.destroy()
     }
   }, []);
+
 
   useEffect(() => {
     if (userStream.current && userStream.current.getVideoTracks()[0] && userStream.current.getVideoTracks()[0].enabled !== videoParams) {
@@ -129,8 +129,13 @@ const Room = (props) => {
       stream,
     });
 
+    let count = 0
+
     peer.on("signal", signal => {
-      socketRef.current.emit("sending signal", { userToSignal, callerID, signal })
+      if (!count) {
+        count++
+        socketRef.current.emit("sending signal", { userToSignal, callerID, signal })
+      }
     })
 
     return peer;
@@ -151,8 +156,6 @@ const Room = (props) => {
 
     return peer;
   }
-
-  console.log(peers)
 
   return (
     <div className="videochat-container">

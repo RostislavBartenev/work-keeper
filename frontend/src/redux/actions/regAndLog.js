@@ -1,7 +1,6 @@
 import * as ACTIONS_TYPES from './actionTypes'
 
 const REGISTRATION = (userData) => {
-  console.log('ACTION_CREATOR_REGISTRATION', userData)
   return {
     type: ACTIONS_TYPES.REGISTRATION,
     payload: {
@@ -51,4 +50,4 @@ export {
   IS_ME,
   LOGOUT,
   IS_NOT_ME
-} 
+}

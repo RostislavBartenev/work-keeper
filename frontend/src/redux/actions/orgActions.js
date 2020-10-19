@@ -9,12 +9,12 @@ const ORG_ADD_ORG = (orgObject) => {
   }
 };
 
-const DEP_TO_ORG = (orgID, depID) => {
+const DEP_TO_ORG = (orgID, depObj) => {
   return {
     type: ACTIONS_TYPES.DEP_TO_ORG,
     payload: {
       orgID,
-      depID
+      depObj
     }
   }
 };

@@ -6,8 +6,6 @@ function PrivateRoute({ children, ...rest }) {
 
   const user = useSelector(state => state.aboutMe)
 
-  console.log(user)
-
   return (
     <Route
       {...rest}

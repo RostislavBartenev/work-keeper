@@ -22,11 +22,14 @@ import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import ChatIcon from '@material-ui/icons/Chat';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import InfoIcon from '@material-ui/icons/Info';
 
 import './navbar.css'
-import {Link, useHistory} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import * as ACTION_TASKS from "../../redux/actions/regAndLog";
+import { Typography } from '@material-ui/core';
 
 const drawerWidth = 240;
 
@@ -91,17 +94,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MiniDrawer({children}) {
+export default function MiniDrawer({ children, setLoggedIn }) {
 
+
+  const history = useHistory()
   const aboutMe = useSelector(state => state.aboutMe)
   const { userID, name, surname } = useSelector(state => state.user)
   const dispatch = useDispatch()
 
+  const depActual = useSelector(state => state.department)
 
   const handleQuit = () => {
+    setLoggedIn(false)
     dispatch(ACTION_TASKS.LOGOUT())
+
+    history.push('/user/login')
     dispatch(ACTION_TASKS.IS_NOT_ME())
     localStorage.clear()
+
   }
 
   const classes = useStyles();
@@ -115,6 +125,8 @@ export default function MiniDrawer({children}) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
 
   return (
     <div className={classes.root}>
@@ -138,6 +150,18 @@ export default function MiniDrawer({children}) {
           >
             <MenuIcon />
           </IconButton>
+
+          <Link to={'/'} className="nav-link">
+            <Typography variant="h6" noWrap>
+              WORK KEEPER {' '}
+            </Typography>
+          </Link>
+
+        <Link to={`/profile/${userID}`} style={{ marginLeft: "auto" }} variant="subtitle1">
+            {name} {surname}
+          </Link>
+
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -169,7 +193,7 @@ export default function MiniDrawer({children}) {
                 </ListItemText>
               </ListItem>
             </Link>
-            {aboutMe.isMe ?
+            {aboutMe.isMe && Object.keys(depActual).length ?
               <>
                 <Link to="/videochat" className="nav-link">
                   <ListItem button>
@@ -190,6 +214,23 @@ export default function MiniDrawer({children}) {
               </>
               : ''}
 
+            <Link to="#" className="nav-link">
+              <ListItem button>
+                <ListItemIcon><LiveHelpIcon /></ListItemIcon>
+                <ListItemText>
+                  Помощь
+                </ListItemText>
+              </ListItem>
+            </Link>
+            <Link to="#" className="nav-link">
+              <ListItem button>
+                <ListItemIcon><InfoIcon /></ListItemIcon>
+                <ListItemText>
+                  О нас
+                </ListItemText>
+              </ListItem>
+            </Link>
+
           </List>
 
           <Divider />
@@ -204,7 +245,7 @@ export default function MiniDrawer({children}) {
                     </ListItemText>
                   </ListItem>
                 </Link>
-                <Link to="/user/registration" className="nav-link" onClick={handleQuit}>
+                <Link to="/user/login" className="nav-link" onClick={handleQuit}>
                   <ListItem button>
                     <ListItemIcon><MeetingRoomIcon /></ListItemIcon>
                     <ListItemText>
@@ -240,7 +281,7 @@ export default function MiniDrawer({children}) {
 
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div  className={classes.toolbar} />
         {children}
       </main>
     </div>

@@ -18,3 +18,7 @@ body {
 .makeStyles-content-10 {
     padding: 0 !important;
 }
+
+.MuiTypography-h6 {
+    font-size: 1.2rem !important;
+}

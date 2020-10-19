@@ -2,30 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom'
 
+import {Button} from "@material-ui/core";
+
+import './style.scss'
+
 
 const WorkerInfo = () => {
-  console.log('RENDER WorkerInfo');
 
   const { id } = useParams()
-  console.log(id, 'WorkerInfo');
+
   const [worker, setWorker] = useState({})
   const history = useHistory()
 
   const workers = useSelector(state => state.department.workers)
 
-  console.log('WorkerInfo_________workersArr', workers);
-
-
 
   useEffect(() => {
-    console.log('THIS WORKER', id);
     const thisWorker = workers.find(worker => worker._id === id)
-    console.log('THIS WORKER', thisWorker);
     setWorker(thisWorker);
   }, [])
-
-
-
 
 
   const backHandler = () => {
@@ -33,25 +28,25 @@ const WorkerInfo = () => {
   }
 
 
-
-
   return (
-    <>
-      <div>Страница отдела</div>
-      { Object.keys(worker).length
-        ?
-        <div className="d-flex flex-column align-items-center">
+    <div className="worker-container">
+      <h1>Информация о сотруднике</h1>
+      <hr/>
+      { Object.keys(worker).length ?
+        <div className='user-info'>
+
           <h1>
             {worker.name + ' ' + worker.surname}
           </h1>
           <p>Email: {worker.email}</p>
 
-          <button onClick={backHandler} type="button" className="btn btn-primary mt-5">Back</button>
-
         </div>
         : null}
 
-    </>
+      <Button className="btn" variant="contained" onClick={backHandler} color="primary">Назад</Button>
+
+    </div>
+
   )
 }
 

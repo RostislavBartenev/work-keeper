@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Form = ({ title, isReg }) => {
+const Form = ({ title, isReg, setLoggedIn }) => {
   const classes = useStyles();
   const history = useHistory()
 
@@ -55,7 +55,6 @@ const Form = ({ title, isReg }) => {
 
   async function login(event) {
     event.preventDefault();
-    console.log(inputs);
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/user/login`, {
         method: 'POST',
@@ -63,10 +62,6 @@ const Form = ({ title, isReg }) => {
         body: JSON.stringify(inputs),
       })
       const result = await response.json();
-
-      //////
-      console.log('LOGIN', result);
-      //////
 
       if (response.ok) {
         dispatch(ACTION_TASKS.LOGIN(result));
@@ -77,10 +72,10 @@ const Form = ({ title, isReg }) => {
           password: ''
         });
 
+        setLoggedIn(true)
         history.push('/')
 
       } else {
-        // console.log(result.message);
         setMessage(result.message);
       }
 
@@ -101,11 +96,6 @@ const Form = ({ title, isReg }) => {
       })
       const result = await response.json();
 
-      //////
-      console.log('REGISTRATION', result);
-      //////
-
-
       if (response.ok) {
         dispatch(ACTION_TASKS.REGISTRATION(result));
         dispatch(ACTION_TASKS.IS_ME());
@@ -116,12 +106,12 @@ const Form = ({ title, isReg }) => {
           password: ''
         });
 
+        setLoggedIn(true)
         history.push('/')
 
       } else {
         setMessage(result.message);
       }
-
 
     } catch (err) {
       console.log(err);

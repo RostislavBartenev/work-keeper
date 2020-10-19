@@ -6,12 +6,9 @@ const loginUserDstructurization = require('../../helpers/loginUserDestr');
 const login = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(req.body)
-
   if (email && password) {
     try {
       const user = await User.findOne({ email }).exec();
-      console.log('LOGIN', user);
       const isValidPass = await bcrypt.compare(password, user.password);
 
       if (isValidPass) {

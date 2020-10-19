@@ -7,6 +7,7 @@ const aboutMeReducer = (state = {}, action) => {
       return {
         ...state,
         isMe: true,
+        isCreator: true,
       }
 
     case ACTION_TYPES.IS_NOT_ME:
@@ -18,8 +19,19 @@ const aboutMeReducer = (state = {}, action) => {
     case ACTION_TYPES.MAIN_IS_CREATOR:
       return {
         ...state,
-        isCreator: action.payload.isCreator
+
+        isCreator: true,
       }
+
+
+    case ACTION_TYPES.MAIN_IS_NOT_CREATOR:
+      return {
+        ...state,
+        isCreator: false,
+      }
+
+
+
 
     default:
       return state

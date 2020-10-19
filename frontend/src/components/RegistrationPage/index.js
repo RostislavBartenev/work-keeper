@@ -1,11 +1,11 @@
 import React from 'react';
 import Form from "../assets/Form";
 
-const RegistrationPage = () => {
+const RegistrationPage = ({ setLoggedIn }) => {
 
 
   return (
-    <Form title={'Регистрация'} isReg={true} />
+    <Form title={'Регистрация'} isReg={true} setLoggedIn={setLoggedIn} />
   )
 }
 

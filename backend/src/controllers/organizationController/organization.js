@@ -4,7 +4,7 @@ const User = require('../../models/HASAN.user.model')
 const errorHandler = require('../../helpers/errorHandler')
 
 
-const serializeUser = (user, isCreator) => ({
+const serializeUser = (user) => ({
   organization: user.organization,
   departments: user.departments,
   _id: user._id,
@@ -14,11 +14,8 @@ const serializeUser = (user, isCreator) => ({
   accessToken: user.accessToken,
   refreshToken: user.refreshToken,
   __v: user.__v,
-  isCreator: isCreator
-
 })
 
-// ПОЛУЧАЕМ ОРГАНИЗАЦИЮ по userID
 module.exports.getAllInfo = async function (req, res) {
   const { userID } = req.query
 
@@ -26,47 +23,31 @@ module.exports.getAllInfo = async function (req, res) {
 
     const thisUser = await User.findOne({ _id: userID })
 
-    console.log(thisUser.organization == true, 'CHECK');
-    let isCreator;
-
-    // ЕСЛИ СОЗДАТЕЛЬ компании
-    if (thisUser.organization.length) {
-      isCreator = true;
-
-      thisUser
-        .populate({
+      .populate('organization')
+      .populate({
+        path: 'departments',
+        populate: {
           path: 'organization',
           populate: { path: 'departments' }
-        })
-        .execPopulate();
+        }
+      })
+      .populate({
+        path: 'organization',
+        populate: { path: 'departments' }
+      })
 
-      const userToSand = serializeUser(thisUser, isCreator)
-      console.log(userToSand, '<<<<<<<CREATORUser');
+    const userToSand = serializeUser(thisUser)
 
-      return res.status(200).json(userToSand) // объект плюс isCreator: true/false
-    }
-
-    // если НЕ СОЗДАТЕЛЬ компании
-    isCreator = false;
-    thisUser
-      .populate('departments')
-      .execPopulate();
-
-    const userToSand = serializeUser(thisUser, isCreator)
-    console.log(userToSand, '<<<<<<<WORKERUser');
-
-    return res.status(200).json(userToSand) // объект плюс isCreator: true/false
+    return res.status(200).json(userToSand)
 
   } catch (e) {
     errorHandler(res, e)
   }
 }
 
-// СОЗДАЕМ ОРГАНИЗАЦИЮ
 module.exports.create = async function (req, res) {
   try {
     const { nameOrg, userID } = req.body
-    console.log('REQBODY', req.body);
 
     const newOrg = new Organization({
       creator: userID,
@@ -80,17 +61,13 @@ module.exports.create = async function (req, res) {
       { $push: { organization: newOrg._id } }
     );
 
-
     res.status(201).json(newOrg)
   } catch (e) {
     errorHandler(res, e)
   }
 
-
-
 }
 
-// УДАЛЯЕМ ОРГАНИЗАЦИЮ
 module.exports.delete = async function (req, res) {
   try {
     await Organization.remove({ _id: req.params.id })

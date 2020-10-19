@@ -6,25 +6,20 @@ const short = require('short-uuid');
 
 const errorHandler = require('../../helpers/errorHandler')
 
-// ПОЛУЧАЕМ WORKER по userID
 module.exports.getAllInfo = async function (req, res) {
   const { userID } = req.query
 
   try {
     const org = await Organization.find({ creator: userID }).populate({ path: 'Department' })
-    console.log(org);
-
     res.status(200).json(org)
   } catch (e) {
     errorHandler(res, e)
   }
 }
 
-// СОЗДАЕМ WORKER-а 
 module.exports.create = async function (req, res) {
   try {
     const { nameDepart, userID, orgID } = req.body
-    console.log('REQBODY', req.body);
 
     const newDepart = new Department({
       creator: userID,
@@ -32,8 +27,6 @@ module.exports.create = async function (req, res) {
       videoConf: short.generate(),
       chat: short.generate()
     });
-
-    console.log(newDepart);
 
     await newDepart.save();
 
@@ -52,7 +45,7 @@ module.exports.create = async function (req, res) {
 
 }
 
-// УДАЛЯЕМ WORKER
+
 module.exports.delete = async function (req, res) {
   try {
     await Organization.remove({ _id: req.params.id })
@@ -66,7 +59,7 @@ module.exports.delete = async function (req, res) {
 
 }
 
-// ОБНОВЛЯЕМ WORKER
+
 module.exports.update = function (req, res) {
   try {
     console.log(req.params);

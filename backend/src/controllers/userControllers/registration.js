@@ -7,10 +7,13 @@ const saltRounds = process.env.saltRounds ?? 10;
 
 const registration = async (req, res) => {
   const { name, surname, email, password } = req.body;
-  console.log(req.body);
   if (name && email && password && surname) {
     try {
       const userPass = await bcrypt.hash(password, +saltRounds);
+
+      if (await User.findOne({email})) {
+        return res.status(422).json({ message: 'Пользователь с таким email уже существует' });
+      }
 
       const newUser = new User({
         name,

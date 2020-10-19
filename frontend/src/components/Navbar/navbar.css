@@ -14,3 +14,12 @@ a {
 .makeStyles-toolbar-9 {
   vertical-align: middle;
 }
+
+.MuiDivider-root {
+  background-color: white !important;
+}
+
+
+.makeStyles-avatar-13 {
+  background: #25274D !important;
+}

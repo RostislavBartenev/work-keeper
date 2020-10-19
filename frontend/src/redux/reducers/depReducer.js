@@ -37,11 +37,22 @@ const depReducer = (state = {}, action) => {
     case ACTION_TYPES.MAIN_DEPARTMENTS:
 
       return {
-        ...state,
         [action.payload.orgID]: [
           ...action.payload.departments
         ]
       }
+
+    case ACTION_TYPES.MAIN_CREATOR_DEPARTMENTS:
+
+      const orgArr = action.payload.organization
+
+      const newObj = {}
+      for (let i = 0; i < orgArr.length; i++) {
+        newObj[orgArr[i]._id] = orgArr[i].departments
+      }
+
+      return newObj
+
 
 
     default:
