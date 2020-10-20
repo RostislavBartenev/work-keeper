@@ -2,7 +2,7 @@
 
 ### Приложение с видеозвонками и чатом для отделов организации 
 
-### Что бы запуcтить введите npm start в папке backend и frontend или зайдите на сайт https://workkeeper.ru/
+### Чтобы запуcтить введите npm start в папке backend и frontend или зайдите на сайт https://workkeeper.ru/
 
 ![](Info/chat.png )
 ![](Info/videochat.png )
