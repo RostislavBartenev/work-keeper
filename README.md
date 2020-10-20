@@ -6,5 +6,4 @@
 
 ![](Info/chat.png )
 ![](Info/videochat.png )
-![](Info/team.png )
 ![](Info/tech.png )
